@@ -299,9 +299,9 @@
 	        stats.domElement.style.top = '0px';
 	        container.appendChild(stats.domElement);
 
-	        /*document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-		document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-		document.addEventListener( 'touchmove', onDocumentTouchMove, false );*/
+	      /* document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+			document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+			document.addEventListener( 'touchmove', onDocumentTouchMove, false );*/
 
 	        window.addEventListener('resize', onWindowResize, false);
 	    
@@ -382,18 +382,12 @@
 	    for (var ix = 0; ix < X; ix++) {
 
 	        for (var iy = 0; iy < Y; iy++) {
-	            var xX;
-	            //console.log( data[ix + sampleRate] );
-	            if (data[ix + sampleRate] >= 1700)
-	                xX = -(100 + 256 - data[ix + sampleRate] * 4 + 800);
-	            else if (data[ix + sampleRate] <= 300) {
-	                xX = -(+256 - data[ix + sampleRate] * 4 + 250);
-	            } else {
-	                xX = -(100 + 256 - data[ix + sampleRate] * 4);
-	            }
+	            var xX = -(100 + 256 - data[ix + sampleRate] * 4);
 
 	            particle = particles[i++];
+	         
 	            particle.position.y = xX;
+
 	            particle.scale.x = particle.scale.y = Math.floor(window.innerWidth / X);
 
 	        }

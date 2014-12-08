@@ -84,17 +84,17 @@
 	        if (!$('#playArea').hasClass('hideMe')) {
 	            setTimeout(function() {
 	                $("#playArea").addClass("hideMe");
-	            }, 1000);
+	            }, 500);
 	        } else {
 	            setTimeout(function() {
 	                $("#playArea").removeClass("hideMe");
-	            }, 1000);
+	            }, 500);
 	        }
 	    });
 
 	    if (song === false) {
 	        document.addEventListener('drop', dropSong, false);
-	        document.addEventListener('drag', drag, false);
+	        document.addEventListener('dragover', drag, false);
 	    }
 
 	}
@@ -124,7 +124,7 @@
 	    event.stopPropagation();
 	    event.preventDefault();
 
-
+	    $( '#playArea').css( { 'border' : "", 'border-radius' : ""});
 	    $('#playArea').text("loading... (Large Songs May Take a Few Minutes to Load)");
 
 	    var dropped = event.dataTransfer.files;
@@ -210,7 +210,7 @@
 	    }
 	    paused = false;
 	    document.removeEventListener('drop', dropSong);
-	    document.removeEventListener('drag', drag);
+	    document.removeEventListener('dragover', drag);
 	    animate();
 
 
@@ -218,6 +218,8 @@
 
 	function drag(evt) {
 	    $('#playArea').text("Drop Music here");
+	     $( '#playArea').css( { 'border' : "1px solid white", 'border-radius' : "5px"});
+
 	    evt.stopPropagation();
 	    evt.preventDefault();
 	    return false;
@@ -355,7 +357,7 @@
 	//
 
 	function animate() {
-
+		
 	    requestAnimationFrame(animate);
 
 	    render();

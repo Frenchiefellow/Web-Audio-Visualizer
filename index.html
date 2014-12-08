@@ -1,0 +1,39 @@
+
+
+<html>
+<head>
+<title> GO </title>
+<link rel="stylesheet" href='./css/index.css' />
+<link rel="stylesheet" href='./css/bootstrap/css/bootstrap.css' />
+</head>
+
+<body>
+	<div id="playArea" class="original">
+		<select id="mode" class="splashDrops" name="mode">
+			<option value="balls" selected="selected" >Balls Mode</option>
+			<option value="party">Party Mode</option>
+			<option value="custom">Custom Mode</option>
+		</select>
+		<select id="songs" class="splashDrops" name="songs">
+			<option value="" selected="selected" >No Songs Currently</option>
+		</select>
+		<p class= " btn btn-success" id="play"> Play? </p>
+		<div style='height: 20px;'></div>
+		<div id="drop"> or Drag and Drop Music File Here:</div>
+	</div>
+
+	<div id="hideDisplay" class="hideMe">
+		<span title="Click to Hide/Restore Display">&#8693;</span>
+	</div>
+</body>
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src='./scripts/jquery/jquery-ui.js'></script>
+<script src='./scripts/main.js'></script>
+<script src='./three/build/three.js'></script>
+<script src="./three/examples/js/renderers/Projector.js"></script>
+<script src="./three/examples/js/renderers/CanvasRenderer.js"></script>
+<script src="./three/examples/js/libs/stats.min.js"></script>
+
+
+</html>

@@ -17,5 +17,5 @@ take me to figure out how to do what I want, but I hope it will be very soon.
 
 <h1> Features / Additions </h1>
 <ul>
-<li> 12/11/14: Added sliders for color change (background and balls) as well as a slider for number of balls. There is now a timer to show you how long the song has been playing, as well. </li>
+<li>  <strong> 12/11/14: </strong>  Added sliders for color change (background and balls) as well as a slider for number of balls. There is now a timer to show you how long the song has been playing, as well. </li>
 </ul>

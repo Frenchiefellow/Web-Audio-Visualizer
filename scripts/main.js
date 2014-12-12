@@ -46,13 +46,12 @@
 		});
 
 		$('body').on('click', '#playArea .btn-success', function() {
-			started = Date.now();
 			if ($('#playArea').hasClass('original')) {
 				$('#playArea').addClass('slideDown', 1000, slide);
 				$('.banner').css( "display", "none");
 				$('.bottomBanner').css( "display", "none");
 				if (evented === undefined) {
-					//started = Date.now();
+
 					mode = $('#mode :selected').val();
 					songName = $('#songs :selected').val();
 					url = './samples/' + songName;
@@ -191,7 +190,7 @@
 		context.decodeAudioData(data, function(buffer) {
 			buf = buffer;
 			play();
-			started = Date.now();
+			
 		}, function(e) {
 			$('#playArea').html("<strong style='font-size: 300%;'>Cannot Read File...</strong><br>Reloading in 3 seconds...");
 			setTimeout(function() {
@@ -218,6 +217,7 @@
 			src.start(0, pauseTime / 1000);
 		}
 		else {
+			started = Date.now();
 			startTime = Date.now();
 			
 

@@ -13,3 +13,9 @@ depicts with colored spheres.
 After learning some Three.js, I hope to make this site very customizable; that is, the user will be able to customize what
 the visualizer output will look like (to a certain extent) and it will be very manipulable. I'm not sure how long it will
 take me to figure out how to do what I want, but I hope it will be very soon. 
+
+
+<h1> Features / Additions </h1>
+<ul>
+<li> 12/11/14: Added sliders for color change (background and balls) as well as a slider for number of balls. There is now a timer to show you how long the song has been playing, as well. </li>
+</ul>

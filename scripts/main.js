@@ -30,6 +30,9 @@
 	var intial;
 	var parts, finaled;
 	var isColored;
+	var infinityMode = false;
+	var count = 0;
+	var randBalls; 
 
 	$(document).ready(function() {
 		mode = $('#mode :selected').val();
@@ -38,6 +41,9 @@
 	});
 
 	function initialize() {
+
+
+		colorBanner( );
 		supported();
 		init3D(X);
 
@@ -106,6 +112,26 @@
 					$("#timer").removeClass("hideMe");
 				}, 500);
 			}
+		});
+
+		$( 'body').on('click', '#infinity', function(){
+			infinityMode = !infinityMode;
+			if (!$('#playArea').hasClass('hideMe')) {
+				setTimeout(function() {
+					$("#playArea").addClass("hideMe");
+					$('#timer').addClass("hideMe");
+					$('#hideDisplay').addClass("hideMe");
+				}, 500);
+			}
+			else {
+				setTimeout(function() {
+					$("#playArea").removeClass("hideMe");
+					$("#timer").removeClass("hideMe");
+					$('#hideDisplay').removeClass("hideMe");
+				}, 500);
+					$( '#ballLabel').text( "Balls: " + randBalls);
+			}
+
 		});
 
 		if (song === false) {
@@ -202,6 +228,7 @@
 
 	function play() {
 		song = true;
+		passed = false;
 		src = context.createBufferSource();
 		src.buffer = buf;
 
@@ -268,6 +295,12 @@
 		ballSlider.style.cssText = "text-shadow: 2px 2px 0px #000000;";
 		document.getElementById('playArea').appendChild(ballSlider);
 
+		var infinity = document.createElement( 'div');
+		infinity.id = 'infinity';
+		infinity.innerHTML = '&infin;'
+		infinity.title = "Click to initiate Infinity Mode!";
+		document.body.appendChild( infinity );
+
 		
 
 		animate();
@@ -290,6 +323,7 @@
 		src.stop(0);
 		pauseTime = Date.now() - startTime;
 		paused = true;
+		animate();
 
 		$('#playArea').html('');
 		var goButton = document.createElement('p');
@@ -306,6 +340,8 @@
 		restartButton.className = "btn btn-primary";
 		restartButton.innerHTML = "New Song?";
 		document.getElementById('playArea').appendChild(restartButton);
+
+
 	}
 
 	function init3D(balls) {
@@ -431,18 +467,124 @@
 	function render() {
 		
 		updateTimer( );
+		if ( infinityMode === false ){
+			sliders(  ); 
+			updatePositions( );
+		}
+		else{
+			//console.log( count % 2 );
+			if( Math.floor( count % 3.25 ) === 0){
+				randBalls =	infinityModeFunction( );
+				updatePositions( );
+			}
+			count++;
+		}
+	
 
-		/*if( pauseTime === undefined )
-			setTimeout( function( ){
-				updateTimer( false );
-			}, 1000 );	
-		else
-			setTimeout( function( ){
-				updateTimer( true );
-			}, 1000 );	*/
+		/**Resets balls to "bottom". Not fluid; setTimeout/SetInterval won't work with it
+		* so this'll stay out until I figure it out or I decide to not pursue this anytmore
+		**/
+
+		/*if( paused === true ){
+			for( var i = 0; i < X; i++){
+				particles[i].position.y =  -(100 + 256);
+			}
+			renderer.render(scene, camera);
+		}*/
+		
+
+		
 
 
+	}
+
+	function updatePositions( ){
+		
+		var data = new Uint8Array(sampleSize);
+		analysizer.getByteFrequencyData(data);
+
+		var sampleRate = Math.floor(sampleSize / Math.max(X, Y));
+
+		camera.position.x += (mouseX - camera.position.x) * .05;
+		camera.position.y += (-mouseY - camera.position.y) * .05;
+		camera.lookAt(scene.position);
+
+		var i = 0;
+
+		for (var ix = 0; ix < X; ix++) {
+
+			for (var iy = 0; iy < Y; iy++) {
+				var xX = -(100 + 256 - data[ix + sampleRate] * 4);
+
+				particle = particles[i++];
+
+				particle.position.y = xX;
+
+			}
+
+		}
+
+		renderer.render(scene, camera);
+
+		count += 0.1;
+
+	}
+
+	function rainbowColors(n, step) {
+		var i = (n * 255 / step);
+		var r = Math.round(Math.sin(0.024 * i + 0) * 127 + 128);
+		var g = Math.round(Math.sin(0.024 * i + 2) * 127 + 128);
+		var b = Math.round(Math.sin(0.024 * i + 4) * 127 + 128);
+
+		return 'rgb(' + r + ',' + g + ',' + b + ')';
+
+	};
+
+	function invertRGB(color) {
+		var v1 = color.split("rgb(");
+		var v2 = v1[1].split(")");
+		var finalV = v2[0].split(",");
+		var r = 255 - finalV[0];
+		var g = 255 - finalV[1];
+		var b = 255 - finalV[2];
+		return "rgb(" + r + ',' + g + ',' + b + ')';
+
+	}
+
+	function updateTimer( ){
+		
+			setInterval(function() {
+			if( paused === false ){
+				var totalSec = (new Date - started) / 1000;
+				var min = Math.floor( totalSec / 60 );
+				var sec =  totalSec % 60;
+	    		$('#timer').text(("0" + min).slice(-2) + ":" + ("0" + sec.toFixed( 0 )).slice( -2 ) );
+    		}
+    		else{
+    			started = new Date - pauseTime;
+    		}
+
+			}, 1000);
+	}
+
+	function colorBanner( ){
+		var childrens = $( "ul li").size();
+		var oneColor = Math.ceil(Math.random() * (255 - childrens) + 1)
+		var reColorMe
+		
+		for(var i = 0; i <= childrens; i++ ){
+			if( i !== 4 ){
+				reColorMe = rainbowColors( oneColor, childrens );
+				$( 'ul li:nth-child(' + i + ')').css( "color" , reColorMe );
+				oneColor++;
+			}
+		}
+
+	}
+
+	function sliders(  ) {
 		var v = X;
+		
 		$('#slider2').slider({
 			value: v
 		});
@@ -452,7 +594,13 @@
 			slide: function(event, ui) {
 				$('#ballLabel').text("Balls: " + ui.value);
 
-				var balls = ui.value;
+			
+					var balls = ui.value;
+				
+				
+
+				console.log( balls );
+
 				if (balls < X) {
 					var count = 0;
 					spacing = Math.floor(window.innerWidth /  balls * 1.25);
@@ -562,71 +710,83 @@
 				}
 			}
 		});
-		var data = new Uint8Array(sampleSize);
-		analysizer.getByteFrequencyData(data);
+	}
 
-		var sampleRate = Math.floor(sampleSize / Math.max(X, Y));
+function infinityModeFunction( ){
+	//console.log( 'here' )
+	var rand = ( Math.random() * 200 ) + 70;
+		var balls = rand;
+				
+				
 
-		camera.position.x += (mouseX - camera.position.x) * .05;
-		camera.position.y += (-mouseY - camera.position.y) * .05;
-		camera.lookAt(scene.position);
+				console.log( balls );
 
-		var i = 0;
+				if (balls < X) {
+					var count = 0;
+					spacing = Math.floor(window.innerWidth /  balls * 1.25);
+					for (var i = 0; i < X; i++) {
+						scene.remove(particles[i]);
+					}
 
-		for (var ix = 0; ix < X; ix++) {
+					for (var i = 0; i < balls; i++) {
+						initial++;
+						finaled = particles[i];;
+						finaled.position.x = (i+.5) * spacing - ((balls * spacing) / (2));
 
-			for (var iy = 0; iy < Y; iy++) {
-				var xX = -(100 + 256 - data[ix + sampleRate] * 4);
+						finaled.position.z = 1 - ((Y) / 2);
+						finaled.scale.x = finaled.scale.y = Math.floor(window.innerWidth / (balls));
+						scene.add(finaled);
 
-				particle = particles[i++];
+					}
 
-				particle.position.y = xX;
+					X = balls;
+				}
+				else {
+					var PI2 = Math.PI * 2;
+					spacing = Math.floor(window.innerWidth / balls * 1.25);
+
+					for (var i = 0; i < X; i++) {
+						scene.remove(particles[i]);
+					}
+					if( $( '#slider').slider("value") == 0 ){
+						for (var i = 0; i < balls; i++) {
+
+							recolor = rainbowColors(initial, (X + balls));
+							var material = new THREE.SpriteCanvasMaterial({
+								color: recolor.toString(),
+								program: function(context) {
+									context.beginPath();
+									context.arc(0, 0, 0.5, 0, PI2, true);
+									context.fill();
+
+								}
+
+							});
+							initial++;
+							finaled = particles[i] = new THREE.Sprite(material);
+
+							finaled.position.x = (i+.5) * spacing - ((( balls) *  spacing) / 2 );
+
+							finaled.position.z = 1 - ((Y) / 2);
+							finaled.scale.x = finaled.scale.y = Math.floor(window.innerWidth / balls);
+							scene.add(finaled);
+						}
+					}else{
+						for (var i = 0; i < balls; i++) {
+							initial++;
+
+							finaled = particles[i];
+							finaled.position.x = (i+.5) * spacing - (((balls) * spacing) / 2 );
+
+							finaled.position.z = 1 - ((Y) / 2);
+							finaled.scale.x = finaled.scale.y = Math.floor(window.innerWidth / balls);
+							scene.add(finaled);
+						}
+					}
+					X = balls;
+				}
+				return Math.floor(rand);
 
 			}
-
-		}
-
-		renderer.render(scene, camera);
-
-		count += 0.1;
-
-	}
-
-	function rainbowColors(n, step) {
-		var i = (n * 255 / step);
-		var r = Math.round(Math.sin(0.024 * i + 0) * 127 + 128);
-		var g = Math.round(Math.sin(0.024 * i + 2) * 127 + 128);
-		var b = Math.round(Math.sin(0.024 * i + 4) * 127 + 128);
-
-		return 'rgb(' + r + ',' + g + ',' + b + ')';
-
-	};
-
-	function invertRGB(color) {
-		var v1 = color.split("rgb(");
-		var v2 = v1[1].split(")");
-		var finalV = v2[0].split(",");
-		var r = 255 - finalV[0];
-		var g = 255 - finalV[1];
-		var b = 255 - finalV[2];
-		return "rgb(" + r + ',' + g + ',' + b + ')';
-
-	}
-
-	function updateTimer( ){
-		
-			setInterval(function() {
-			if( paused === false ){
-				var totalSec = (new Date - started) / 1000;
-				var min = Math.floor( totalSec / 60 );
-				var sec =  totalSec % 60;
-	    		$('#timer').text(("0" + min).slice(-2) + ":" + ("0" + sec.toFixed( 0 )).slice( -2 ) );
-    		}
-    		else{
-    			started = new Date - pauseTime;
-    		}
-
-			}, 1000);
-	}
-
+	
 

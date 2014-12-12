@@ -46,12 +46,13 @@
 		});
 
 		$('body').on('click', '#playArea .btn-success', function() {
+			started = Date.now();
 			if ($('#playArea').hasClass('original')) {
 				$('#playArea').addClass('slideDown', 1000, slide);
 				$('.banner').css( "display", "none");
 				$('.bottomBanner').css( "display", "none");
 				if (evented === undefined) {
-					started = Date.now();
+					//started = Date.now();
 					mode = $('#mode :selected').val();
 					songName = $('#songs :selected').val();
 					url = './samples/' + songName;
@@ -63,9 +64,13 @@
 				}
 				song = true;
 				$('#hideDisplay').removeClass('hideMe');
+				$('.banner').css( "display", "none");
+				$('.bottomBanner').css( "display", "none");
 
 			}
 			else {
+				$('.banner').css( "display", "none");
+				$('.bottomBanner').css( "display", "none");
 				mode = $('#mode :selected').val();
 				songName = $('#songs :selected').val();
 				url = './samples/' + songName;
@@ -143,6 +148,8 @@
 			'border': "",
 			'border-radius': ""
 		});
+		$('.banner').css( "display", "none");
+		$('.bottomBanner').css( "display", "none");
 		$('#playArea').html("<strong style='font-size: 300%;'>loading...</strong><br>(Large Songs May Take a Few Minutes to Load)<br>");
 		var dropped = event.dataTransfer.files;
 		evented = dropped;
@@ -184,6 +191,7 @@
 		context.decodeAudioData(data, function(buffer) {
 			buf = buffer;
 			play();
+			started = Date.now();
 		}, function(e) {
 			$('#playArea').html("<strong style='font-size: 300%;'>Cannot Read File...</strong><br>Reloading in 3 seconds...");
 			setTimeout(function() {
@@ -211,7 +219,7 @@
 		}
 		else {
 			startTime = Date.now();
-		
+			
 
 			var timer = document.createElement('div');
 			timer.id = 'timer';

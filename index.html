@@ -5,9 +5,11 @@
 <title> GO </title>
 <link rel="stylesheet" href='./css/index.css' />
 <link rel="stylesheet" href='./css/bootstrap/css/bootstrap.css' />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 </head>
 
 <body>
+	<div class="banner"> Web Visualizer! </div>
 	<div id="playArea" class="original">
 		<select id="mode" class="splashDrops" name="mode">
 			<option value="balls" selected="selected" >Balls Mode</option>
@@ -16,12 +18,21 @@
 		</select>
 		<select id="songs" class="splashDrops" name="songs">
 			<option value="" selected="selected" >No Songs Currently</option>
+			
+
 		</select>
 		<p class= " btn btn-success" id="play"> Play? </p>
 		<div style='height: 20px;'></div>
-		<div id="drop"> or Drag and Drop Music File Here:</div>
+		<div id="drop"> 
+			<div id='dragDrop'>or Drag and Drop Music File Here:</div>
+			<div id='warning'>Files larger than 60 minutes appear to break the site...</div>
+		</div>
 	</div>
-
+	<div class="bottomBanner">
+		<span> Designed by Frenchiefellow || 
+			<a href="http://www.github.com/frenchiefellow/Web-Audio-Visualizer">Source</a>
+			</span>
+	</div>
 	<div id="hideDisplay" class="hideMe">
 		<span title="Click to Hide/Restore Display">&#8693;</span>
 	</div>

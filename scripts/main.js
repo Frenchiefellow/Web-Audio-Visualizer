@@ -32,7 +32,7 @@
 	var isColored;
 	var infinityMode = false;
 	var count = 0;
-	var randBalls; 
+	var randBalls;
 
 	$(document).ready(function() {
 		mode = $('#mode :selected').val();
@@ -42,40 +42,37 @@
 
 	function initialize() {
 
-
-		colorBanner( );
+		colorBanner();
 		supported();
 		init3D(X);
 
 		$('body').on('click', '#playArea .btn-danger', function() {
 			stopSong();
+			$('#infinity').addClass('hideMe');
 		});
 
 		$('body').on('click', '#playArea .btn-success', function() {
 			if ($('#playArea').hasClass('original')) {
 				$('#playArea').addClass('slideDown', 1000, slide);
-				$('.banner').css( "display", "none");
-				$('.bottomBanner').css( "display", "none");
+				$('.banner').css("display", "none");
+				$('.bottomBanner').css("display", "none");
 				if (evented === undefined) {
 
 					mode = $('#mode :selected').val();
 					songName = $('#songs :selected').val();
 					url = './samples/' + songName;
 					loadSong(url);
-				}
-				else {
-					//alert( evented );
+				} else {
 					reloadDropSong(evented);
 				}
 				song = true;
 				$('#hideDisplay').removeClass('hideMe');
-				$('.banner').css( "display", "none");
-				$('.bottomBanner').css( "display", "none");
+				$('.banner').css("display", "none");
+				$('.bottomBanner').css("display", "none");
 
-			}
-			else {
-				$('.banner').css( "display", "none");
-				$('.bottomBanner').css( "display", "none");
+			} else {
+				$('.banner').css("display", "none");
+				$('.bottomBanner').css("display", "none");
 				mode = $('#mode :selected').val();
 				songName = $('#songs :selected').val();
 				url = './samples/' + songName;
@@ -87,13 +84,9 @@
 
 		$('body').on('click', '#playArea .btn-info', function() {
 			if (evented === undefined) {
-				//alert( evented );
-
 				url = './samples/' + songName;
 				loadSong(url);
-			}
-			else {
-				//alert( evented );
+			} else {
 				reloadDropSong(evented);
 			}
 
@@ -104,32 +97,36 @@
 				setTimeout(function() {
 					$("#playArea").addClass("hideMe");
 					$('#timer').addClass("hideMe");
+					$('#infinity').addClass("hideMe");
+					$('#stats').addClass("hideMe");
 				}, 500);
-			}
-			else {
+			} else {
 				setTimeout(function() {
 					$("#playArea").removeClass("hideMe");
 					$("#timer").removeClass("hideMe");
+					$("#infinity").removeClass("hideMe");
+					$("#stats").removeClass("hideMe");
 				}, 500);
 			}
 		});
 
-		$( 'body').on('click', '#infinity', function(){
+		$('body').on('click', '#infinity', function() {
 			infinityMode = !infinityMode;
 			if (!$('#playArea').hasClass('hideMe')) {
 				setTimeout(function() {
 					$("#playArea").addClass("hideMe");
 					$('#timer').addClass("hideMe");
 					$('#hideDisplay').addClass("hideMe");
+					$('#stats').addClass("hideMe");
 				}, 500);
-			}
-			else {
+			} else {
 				setTimeout(function() {
 					$("#playArea").removeClass("hideMe");
 					$("#timer").removeClass("hideMe");
 					$('#hideDisplay').removeClass("hideMe");
+					$("#stats").removeClass("hideMe");
 				}, 500);
-					$( '#ballLabel').text( "Balls: " + randBalls);
+				$('#ballLabel').text("Balls: " + randBalls);
 			}
 
 		});
@@ -139,8 +136,6 @@
 			document.addEventListener('dragover', drag, false);
 		}
 
-
-		
 	}
 
 	function slide() {
@@ -158,8 +153,7 @@
 		try {
 			window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			audioContext = new window.AudioContext();
-		}
-		catch (e) {
+		} catch (e) {
 			alert("GET WEBAUDIO");
 			return;
 		}
@@ -173,8 +167,8 @@
 			'border': "",
 			'border-radius': ""
 		});
-		$('.banner').css( "display", "none");
-		$('.bottomBanner').css( "display", "none");
+		$('.banner').css("display", "none");
+		$('.bottomBanner').css("display", "none");
 		$('#playArea').html("<strong style='font-size: 300%;'>loading...</strong><br>(Large Songs May Take a Few Minutes to Load)<br>");
 		var dropped = event.dataTransfer.files;
 		evented = dropped;
@@ -216,7 +210,7 @@
 		context.decodeAudioData(data, function(buffer) {
 			buf = buffer;
 			play();
-			
+
 		}, function(e) {
 			$('#playArea').html("<strong style='font-size: 300%;'>Cannot Read File...</strong><br>Reloading in 3 seconds...");
 			setTimeout(function() {
@@ -242,19 +236,15 @@
 		if (paused) {
 			startTime = Date.now() - pauseTime;
 			src.start(0, pauseTime / 1000);
-		}
-		else {
+		} else {
 			started = Date.now();
 			startTime = Date.now();
-			
 
 			var timer = document.createElement('div');
 			timer.id = 'timer';
-			timer.style.cssText = "color: white; position: absolute; top: 5%; width: 100%; text-align: center;";
+			timer.style.cssText = "color: white; position: absolute; top: 3%; width: 100%; text-align: center;";
 			timer.innerHTML = "00:00";
 			document.body.appendChild(timer);
-
-
 
 			src.start(0);
 		}
@@ -276,7 +266,7 @@
 		var colorLabel = document.createElement('label');
 		colorLabel.id = 'colorLabel';
 		colorLabel.innerHTML = " Background Color: 0";
-		colorLabel.style.cssText = "text-shadow: 2px 2px 0px #000000;";
+		colorLabel.style.cssText = "text-shadow: 2px 2px 0px #000000; font-size: 100%;";
 		document.getElementById('playArea').appendChild(colorLabel);
 
 		var colorSlider = document.createElement('div');
@@ -286,8 +276,8 @@
 
 		var ballLabel = document.createElement('label');
 		ballLabel.id = 'ballLabel';
-		ballLabel.innerHTML = " Balls: " + X;
-		ballLabel.style.cssText = "text-shadow: 2px 2px 0px #000000;";
+		ballLabel.innerHTML = " Balls: " + Math.floor(X);
+		ballLabel.style.cssText = "text-shadow: 2px 2px 0px #000000; font-size: 100%;";
 		document.getElementById('playArea').appendChild(ballLabel);
 
 		var ballSlider = document.createElement('div');
@@ -295,13 +285,11 @@
 		ballSlider.style.cssText = "text-shadow: 2px 2px 0px #000000;";
 		document.getElementById('playArea').appendChild(ballSlider);
 
-		var infinity = document.createElement( 'div');
+		var infinity = document.createElement('div');
 		infinity.id = 'infinity';
 		infinity.innerHTML = '&infin;'
 		infinity.title = "Click to initiate Infinity Mode!";
-		document.body.appendChild( infinity );
-
-		
+		document.body.appendChild(infinity);
 
 		animate();
 
@@ -340,7 +328,6 @@
 		restartButton.className = "btn btn-primary";
 		restartButton.innerHTML = "New Song?";
 		document.getElementById('playArea').appendChild(restartButton);
-
 
 	}
 
@@ -465,25 +452,22 @@
 	}
 
 	function render() {
-		
-		updateTimer( );
-		if ( infinityMode === false ){
-			sliders(  ); 
-			updatePositions( );
-		}
-		else{
-			//console.log( count % 2 );
-			if( Math.floor( count % 3.25 ) === 0){
-				randBalls =	infinityModeFunction( );
-				updatePositions( );
+
+		updateTimer();
+		if (infinityMode === false) {
+			sliders();
+			updatePositions();
+		} else {
+			if (Math.floor(count % 3.25) === 0) {
+				randBalls = infinityModeFunction();
+				updatePositions();
 			}
 			count++;
 		}
-	
 
 		/**Resets balls to "bottom". Not fluid; setTimeout/SetInterval won't work with it
-		* so this'll stay out until I figure it out or I decide to not pursue this anytmore
-		**/
+		 * so this'll stay out until I figure it out or I decide to not pursue this anytmore
+		 **/
 
 		/*if( paused === true ){
 			for( var i = 0; i < X; i++){
@@ -491,15 +475,11 @@
 			}
 			renderer.render(scene, camera);
 		}*/
-		
-
-		
-
 
 	}
 
-	function updatePositions( ){
-		
+	function updatePositions() {
+
 		var data = new Uint8Array(sampleSize);
 		analysizer.getByteFrequencyData(data);
 
@@ -514,7 +494,11 @@
 		for (var ix = 0; ix < X; ix++) {
 
 			for (var iy = 0; iy < Y; iy++) {
-				var xX = -(100 + 256 - data[ix + sampleRate] * 4);
+				var xX;
+				if (!$('#playArea').hasClass('hideMe'))
+				 	xX = -(100 + 256 - data[ix + sampleRate] * 4);
+				else
+					xX = -( 600 - data[ix + sampleRate] *4);
 
 				particle = particles[i++];
 
@@ -551,40 +535,39 @@
 
 	}
 
-	function updateTimer( ){
-		
-			setInterval(function() {
-			if( paused === false ){
-				var totalSec = (new Date - started) / 1000;
-				var min = Math.floor( totalSec / 60 );
-				var sec =  totalSec % 60;
-	    		$('#timer').text(("0" + min).slice(-2) + ":" + ("0" + sec.toFixed( 0 )).slice( -2 ) );
-    		}
-    		else{
-    			started = new Date - pauseTime;
-    		}
+	function updateTimer() {
 
-			}, 1000);
+		setInterval(function() {
+			if (paused === false) {
+				var totalSec = (new Date - started) / 1000;
+				var min = Math.floor(totalSec / 60);
+				var sec = totalSec % 60;
+				$('#timer').text(("0" + min).slice(-2) + ":" + ("0" + sec.toFixed(0)).slice(-2));
+			} else {
+				started = new Date - pauseTime;
+			}
+
+		}, 1000);
 	}
 
-	function colorBanner( ){
-		var childrens = $( "ul li").size();
+	function colorBanner() {
+		var childrens = $("ul li").size();
 		var oneColor = Math.ceil(Math.random() * (255 - childrens) + 1)
 		var reColorMe
-		
-		for(var i = 0; i <= childrens; i++ ){
-			if( i !== 4 ){
-				reColorMe = rainbowColors( oneColor, childrens );
-				$( 'ul li:nth-child(' + i + ')').css( "color" , reColorMe );
+
+		for (var i = 0; i <= childrens; i++) {
+			if (i !== 4) {
+				reColorMe = rainbowColors(oneColor, childrens);
+				$('ul li:nth-child(' + i + ')').css("color", reColorMe);
 				oneColor++;
 			}
 		}
 
 	}
 
-	function sliders(  ) {
+	function sliders() {
 		var v = X;
-		
+
 		$('#slider2').slider({
 			value: v
 		});
@@ -594,16 +577,13 @@
 			slide: function(event, ui) {
 				$('#ballLabel').text("Balls: " + ui.value);
 
-			
-					var balls = ui.value;
-				
-				
+				var balls = ui.value;
 
-				console.log( balls );
+				console.log(balls);
 
 				if (balls < X) {
 					var count = 0;
-					spacing = Math.floor(window.innerWidth /  balls * 1.25);
+					spacing = Math.floor(window.innerWidth / balls * 1.25);
 					for (var i = 0; i < X; i++) {
 						scene.remove(particles[i]);
 					}
@@ -611,7 +591,7 @@
 					for (var i = 0; i < balls; i++) {
 						initial++;
 						finaled = particles[i];;
-						finaled.position.x = (i+.5) * spacing - ((balls * spacing) / (2));
+						finaled.position.x = (i + .5) * spacing - ((balls * spacing) / (2));
 
 						finaled.position.z = 1 - ((Y) / 2);
 						finaled.scale.x = finaled.scale.y = Math.floor(window.innerWidth / (balls));
@@ -620,15 +600,14 @@
 					}
 
 					X = balls;
-				}
-				else {
+				} else {
 					var PI2 = Math.PI * 2;
 					spacing = Math.floor(window.innerWidth / balls * 1.25);
 
 					for (var i = 0; i < X; i++) {
 						scene.remove(particles[i]);
 					}
-					if( $( '#slider').slider("value") == 0 ){
+					if ($('#slider').slider("value") == 0) {
 						for (var i = 0; i < balls; i++) {
 
 							recolor = rainbowColors(initial, (X + balls));
@@ -645,18 +624,18 @@
 							initial++;
 							finaled = particles[i] = new THREE.Sprite(material);
 
-							finaled.position.x = (i+.5) * spacing - ((( balls) *  spacing) / 2 );
+							finaled.position.x = (i + .5) * spacing - (((balls) * spacing) / 2);
 
 							finaled.position.z = 1 - ((Y) / 2);
 							finaled.scale.x = finaled.scale.y = Math.floor(window.innerWidth / balls);
 							scene.add(finaled);
 						}
-					}else{
+					} else {
 						for (var i = 0; i < balls; i++) {
 							initial++;
 
 							finaled = particles[i];
-							finaled.position.x = (i+.5) * spacing - (((balls) * spacing) / 2 );
+							finaled.position.x = (i + .5) * spacing - (((balls) * spacing) / 2);
 
 							finaled.position.z = 1 - ((Y) / 2);
 							finaled.scale.x = finaled.scale.y = Math.floor(window.innerWidth / balls);
@@ -673,18 +652,15 @@
 		$('#slider').slider({
 			change: function(event, ui) {
 				var r, g, b;
-				//alert( ui.value);
 				if (ui.value <= 50 && ui.value > 0) {
 					r = 255;
 					g = Math.round(255 * ui.value / 50);
 					b = 0;
-				}
-				else if (ui.value > 51) {
+				} else if (ui.value > 51) {
 					r = Math.round(255 * (100 - ui.value) / 50);
 					g = r;
 					b = Math.round(255 * (ui.value - 50) / 50);
-				}
-				else {
+				} else {
 					r = 0;
 					g = 0;
 					b = 0;
@@ -697,8 +673,7 @@
 					for (var i = 0; i < X; i++) {
 						particles[i].material.color.set(invertRGB(newColor));
 					}
-				}
-				else {
+				} else {
 					var col = Math.ceil(Math.random() * (255 - X) + 1);
 					var recol;
 					for (var i = 0; i < X; i++) {
@@ -712,81 +687,73 @@
 		});
 	}
 
-function infinityModeFunction( ){
-	//console.log( 'here' )
-	var rand = ( Math.random() * 200 ) + 70;
+	function infinityModeFunction() {
+		var rand = (Math.random() * 200) + 70;
 		var balls = rand;
-				
-				
 
-				console.log( balls );
+		if (balls < X) {
+			var count = 0;
+			spacing = Math.floor(window.innerWidth / balls * 1.25);
+			for (var i = 0; i < X; i++) {
+				scene.remove(particles[i]);
+			}
 
-				if (balls < X) {
-					var count = 0;
-					spacing = Math.floor(window.innerWidth /  balls * 1.25);
-					for (var i = 0; i < X; i++) {
-						scene.remove(particles[i]);
-					}
+			for (var i = 0; i < balls; i++) {
+				initial++;
+				finaled = particles[i];;
+				finaled.position.x = (i + .5) * spacing - ((balls * spacing) / (2));
 
-					for (var i = 0; i < balls; i++) {
-						initial++;
-						finaled = particles[i];;
-						finaled.position.x = (i+.5) * spacing - ((balls * spacing) / (2));
-
-						finaled.position.z = 1 - ((Y) / 2);
-						finaled.scale.x = finaled.scale.y = Math.floor(window.innerWidth / (balls));
-						scene.add(finaled);
-
-					}
-
-					X = balls;
-				}
-				else {
-					var PI2 = Math.PI * 2;
-					spacing = Math.floor(window.innerWidth / balls * 1.25);
-
-					for (var i = 0; i < X; i++) {
-						scene.remove(particles[i]);
-					}
-					if( $( '#slider').slider("value") == 0 ){
-						for (var i = 0; i < balls; i++) {
-
-							recolor = rainbowColors(initial, (X + balls));
-							var material = new THREE.SpriteCanvasMaterial({
-								color: recolor.toString(),
-								program: function(context) {
-									context.beginPath();
-									context.arc(0, 0, 0.5, 0, PI2, true);
-									context.fill();
-
-								}
-
-							});
-							initial++;
-							finaled = particles[i] = new THREE.Sprite(material);
-
-							finaled.position.x = (i+.5) * spacing - ((( balls) *  spacing) / 2 );
-
-							finaled.position.z = 1 - ((Y) / 2);
-							finaled.scale.x = finaled.scale.y = Math.floor(window.innerWidth / balls);
-							scene.add(finaled);
-						}
-					}else{
-						for (var i = 0; i < balls; i++) {
-							initial++;
-
-							finaled = particles[i];
-							finaled.position.x = (i+.5) * spacing - (((balls) * spacing) / 2 );
-
-							finaled.position.z = 1 - ((Y) / 2);
-							finaled.scale.x = finaled.scale.y = Math.floor(window.innerWidth / balls);
-							scene.add(finaled);
-						}
-					}
-					X = balls;
-				}
-				return Math.floor(rand);
+				finaled.position.z = 1 - ((Y) / 2);
+				finaled.scale.x = finaled.scale.y = Math.floor(window.innerWidth / (balls));
+				scene.add(finaled);
 
 			}
-	
 
+			X = balls;
+		} else {
+			var PI2 = Math.PI * 2;
+			spacing = Math.floor(window.innerWidth / balls * 1.25);
+
+			for (var i = 0; i < X; i++) {
+				scene.remove(particles[i]);
+			}
+			if ($('#slider').slider("value") == 0) {
+				for (var i = 0; i < balls; i++) {
+
+					recolor = rainbowColors(initial, (X + balls));
+					var material = new THREE.SpriteCanvasMaterial({
+						color: recolor.toString(),
+						program: function(context) {
+							context.beginPath();
+							context.arc(0, 0, 0.5, 0, PI2, true);
+							context.fill();
+
+						}
+
+					});
+					initial++;
+					finaled = particles[i] = new THREE.Sprite(material);
+
+					finaled.position.x = (i + .5) * spacing - (((balls) * spacing) / 2);
+
+					finaled.position.z = 1 - ((Y) / 2);
+					finaled.scale.x = finaled.scale.y = Math.floor(window.innerWidth / balls);
+					scene.add(finaled);
+				}
+			} else {
+				for (var i = 0; i < balls; i++) {
+					initial++;
+
+					finaled = particles[i];
+					finaled.position.x = (i + .5) * spacing - (((balls) * spacing) / 2);
+
+					finaled.position.z = 1 - ((Y) / 2);
+					finaled.scale.x = finaled.scale.y = Math.floor(window.innerWidth / balls);
+					scene.add(finaled);
+				}
+			}
+			X = balls;
+		}
+		return Math.floor(rand);
+
+	}

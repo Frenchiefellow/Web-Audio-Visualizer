@@ -116,10 +116,6 @@ body #playArea{
 	top: 3%;
 }
 
-.ui-slider-handle, .ui-state-default, .ui-corner-all{
-	cursor: pointer;
-}
-
 #ballLabel{
 	width: 15%;
 	position: absolute;
@@ -142,13 +138,14 @@ body #playArea{
 	position: absolute;
 	color: white;
 	top: 20%;
-	font-size: 1000%;
+	font-size: 800%;
 	font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
 
 }
 .banner li{
 	display: inline-block;
 	text-align: center;
+
 }
 
 .bottomBanner{

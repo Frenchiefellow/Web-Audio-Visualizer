@@ -1,6 +1,6 @@
 	var songName;
 	var url;
-	var mode;
+	var mode = 'balls';
 	var context = new AudioContext();
 	var buf;
 	var src;
@@ -11,7 +11,7 @@
 	var startTime, started;
 	var paused;
 	var sampleSize = 2048;
-	var X = 60,
+	var X = 128,
 		spacing = Math.floor(window.innerWidth / X * 1.25),
 		Y = 1;
 	var song = false;
@@ -35,7 +35,6 @@
 	var randBalls;
 
 	$(document).ready(function() {
-		mode = $('#mode :selected').val();
 		$('body').css("background-color", "black");
 		initialize();
 	});
@@ -44,7 +43,7 @@
 
 		colorBanner();
 		supported();
-		init3D(X);
+		//init3D(X);
 
 		$('body').on('click', '#playArea .btn-danger', function() {
 			stopSong();
@@ -52,13 +51,19 @@
 		});
 
 		$('body').on('click', '#playArea .btn-success', function() {
+			init3D( X, mode );
 			if ($('#playArea').hasClass('original')) {
-				$('#playArea').addClass('slideDown', 1000, slide);
+
+				if( mode === 'balls')
+					$('#playArea').addClass('slideDown', 1000, slide);
+				else{
+					$('#playArea').css("display", "none");
+					
+				}
+
 				$('.banner').css("display", "none");
 				$('.bottomBanner').css("display", "none");
 				if (evented === undefined) {
-
-					mode = $('#mode :selected').val();
 					songName = $('#songs :selected').val();
 					url = './samples/' + songName;
 					loadSong(url);
@@ -73,7 +78,6 @@
 			} else {
 				$('.banner').css("display", "none");
 				$('.bottomBanner').css("display", "none");
-				mode = $('#mode :selected').val();
 				songName = $('#songs :selected').val();
 				url = './samples/' + songName;
 				loadSong(url);
@@ -169,6 +173,7 @@
 		});
 		$('.banner').css("display", "none");
 		$('.bottomBanner').css("display", "none");
+		init3D( X, mode );
 		$('#playArea').html("<strong style='font-size: 300%;'>loading...</strong><br>(Large Songs May Take a Few Minutes to Load)<br>");
 		var dropped = event.dataTransfer.files;
 		evented = dropped;
@@ -256,40 +261,50 @@
 		stopButton.innerHTML = "Stop Playing: " + songName;
 		document.getElementById('playArea').appendChild(stopButton);
 		if ($('#playArea').hasClass('original')) {
-			$('#playArea').addClass('slideDown', 1000, slide);
+			if( mode === 'balls')
+					$('#playArea').addClass('slideDown', 1000, slide);
+				else{
+					$('#playArea').css("display", "none");
+					
+				}
+
 			$('#hideDisplay').removeClass('hideMe');
 		}
 		paused = false;
 		document.removeEventListener('drop', dropSong);
 		document.removeEventListener('dragover', drag);
 
-		var colorLabel = document.createElement('label');
-		colorLabel.id = 'colorLabel';
-		colorLabel.innerHTML = " Background Color: 0";
-		colorLabel.style.cssText = "text-shadow: 2px 2px 0px #000000; font-size: 100%;";
-		document.getElementById('playArea').appendChild(colorLabel);
+		if( mode === 'balls'){
+			var colorLabel = document.createElement('label');
+			colorLabel.id = 'colorLabel';
+			colorLabel.innerHTML = " Background Color: 0";
+			colorLabel.style.cssText = "text-shadow: 2px 2px 0px #000000; font-size: 100%;";
+			document.getElementById('playArea').appendChild(colorLabel);
 
-		var colorSlider = document.createElement('div');
-		colorSlider.id = 'slider';
-		colorSlider.style.cssText = "text-shadow: 2px 2px 0px #000000;";
-		document.getElementById('playArea').appendChild(colorSlider);
+			var colorSlider = document.createElement('div');
+			colorSlider.id = 'slider';
+			colorSlider.style.cssText = "text-shadow: 2px 2px 0px #000000;";
+			document.getElementById('playArea').appendChild(colorSlider);
 
-		var ballLabel = document.createElement('label');
-		ballLabel.id = 'ballLabel';
-		ballLabel.innerHTML = " Balls: " + Math.floor(X);
-		ballLabel.style.cssText = "text-shadow: 2px 2px 0px #000000; font-size: 100%;";
-		document.getElementById('playArea').appendChild(ballLabel);
+			var ballLabel = document.createElement('label');
+			ballLabel.id = 'ballLabel';
+			ballLabel.innerHTML = " Balls: " + Math.floor(X);
+			ballLabel.style.cssText = "text-shadow: 2px 2px 0px #000000; font-size: 100%;";
+			document.getElementById('playArea').appendChild(ballLabel);
 
-		var ballSlider = document.createElement('div');
-		ballSlider.id = 'slider2';
-		ballSlider.style.cssText = "text-shadow: 2px 2px 0px #000000;";
-		document.getElementById('playArea').appendChild(ballSlider);
+			var ballSlider = document.createElement('div');
+			ballSlider.id = 'slider2';
+			ballSlider.style.cssText = "text-shadow: 2px 2px 0px #000000;";
+			document.getElementById('playArea').appendChild(ballSlider);
 
-		var infinity = document.createElement('div');
-		infinity.id = 'infinity';
-		infinity.innerHTML = '&infin;'
-		infinity.title = "Click to initiate Infinity Mode!";
-		document.body.appendChild(infinity);
+			var infinity = document.createElement('div');
+			infinity.id = 'infinity';
+			infinity.innerHTML = '&infin;'
+			infinity.title = "Click to initiate Infinity Mode!";
+			document.body.appendChild(infinity);
+		}/*else{
+			alert( "working");
+		}*/
 
 		animate();
 
@@ -301,7 +316,6 @@
 			'border': "1px solid white",
 			'border-radius': "5px"
 		});
-
 		evt.stopPropagation();
 		evt.preventDefault();
 		return false;
@@ -313,83 +327,94 @@
 		paused = true;
 		animate();
 
-		$('#playArea').html('');
-		var goButton = document.createElement('p');
-		goButton.id = "go";
-		goButton.className = "btn btn-info";
-		goButton.innerHTML = "Continue Playing?";
-		document.getElementById('playArea').appendChild(goButton);
+		if( mode === 'balls'){
+			$('#playArea').html('');
+			var goButton = document.createElement('p');
+			goButton.id = "go";
+			goButton.className = "btn btn-info";
+			goButton.innerHTML = "Continue Playing?";
+			document.getElementById('playArea').appendChild(goButton);
 
-		var restartButton = document.createElement('p');
-		restartButton.id = "restart";
-		restartButton.onclick = function() {
-			window.location.reload();
-		}
-		restartButton.className = "btn btn-primary";
-		restartButton.innerHTML = "New Song?";
-		document.getElementById('playArea').appendChild(restartButton);
+			var restartButton = document.createElement('p');
+			restartButton.id = "restart";
+			restartButton.onclick = function() {
+				window.location.reload();
+			}
+			restartButton.className = "btn btn-primary";
+			restartButton.innerHTML = "New Song?";
+			document.getElementById('playArea').appendChild(restartButton);
+		}/*else{
+			alert( "Working!");
+		}*/
 
 	}
 
-	function init3D(balls) {
+	function init3D( balls, mode ) {
+		if( mode === 'balls' ){
+			container = document.createElement('div');
+			document.body.appendChild(container);
 
-		container = document.createElement('div');
-		document.body.appendChild(container);
+			camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
+			camera.position.z = 1000;
 
-		camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
-		camera.position.z = 1000;
+			scene = new THREE.Scene();
 
-		scene = new THREE.Scene();
+			particles = new Array();
 
-		particles = new Array();
+			var PI2 = Math.PI * 2;
 
-		var PI2 = Math.PI * 2;
+			var i = 0;
+			var colored = Math.ceil(Math.random() * (255 - X) + 1);
 
-		var i = 0;
-		var colored = Math.ceil(Math.random() * (255 - X) + 1);
+			for (var ix = 0; ix < balls; ix++) {
+				for (var iy = 0; iy < Y; iy++) {
+					recolor = rainbowColors(colored, (balls));
+					var material = new THREE.SpriteCanvasMaterial({
+						color: recolor.toString(),
+						program: function(context) {
+							context.beginPath();
+							context.arc(0, 0, 0.5, 0, PI2, true);
+							context.fill();
 
-		for (var ix = 0; ix < balls; ix++) {
-			for (var iy = 0; iy < Y; iy++) {
-				recolor = rainbowColors(colored, (balls));
-				var material = new THREE.SpriteCanvasMaterial({
-					color: recolor.toString(),
-					program: function(context) {
-						context.beginPath();
-						context.arc(0, 0, 0.5, 0, PI2, true);
-						context.fill();
+						}
 
-					}
+					});
+					colored++;
+					initial = colored;
 
-				});
-				colored++;
-				initial = colored;
+					particle = particles[i++] = new THREE.Sprite(material);
+					particle.position.x = ix * spacing - ((balls * spacing) / 2);
+					particle.position.z = iy - ((Y) / 2);
+					particle.scale.x = particle.scale.y = Math.floor(window.innerWidth / X);
+					scene.add(particle);
 
-				particle = particles[i++] = new THREE.Sprite(material);
-				particle.position.x = ix * spacing - ((balls * spacing) / 2);
-				particle.position.z = iy - ((Y) / 2);
-				particle.scale.x = particle.scale.y = Math.floor(window.innerWidth / X);
-				scene.add(particle);
+				}
 
 			}
 
+			renderer = new THREE.CanvasRenderer();
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			var canvasColor = '#000000';
+			renderer.setClearColor(canvasColor, 1);
+			container.appendChild(renderer.domElement);
+
+			stats = new Stats();
+			stats.domElement.style.position = 'absolute';
+			stats.domElement.style.top = '0px';
+			container.appendChild(stats.domElement);
+
+			/* document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+				document.addEventListener( 'touchmove', onDocumentTouchMove, false );*/
+
+			window.addEventListener('resize', onWindowResize, false);
+		}else if (mode === 'party'){
+			partyInit();
+		}else{
+			particles = new Array();
+			customInit();
+
 		}
-
-		renderer = new THREE.CanvasRenderer();
-		renderer.setSize(window.innerWidth, window.innerHeight);
-		var canvasColor = '#000000';
-		renderer.setClearColor(canvasColor, 1);
-		container.appendChild(renderer.domElement);
-
-		stats = new Stats();
-		stats.domElement.style.position = 'absolute';
-		stats.domElement.style.top = '0px';
-		container.appendChild(stats.domElement);
-
-		/* document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-			document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-			document.addEventListener( 'touchmove', onDocumentTouchMove, false );*/
-
-		window.addEventListener('resize', onWindowResize, false);
 
 	}
 
@@ -455,8 +480,14 @@
 
 		updateTimer();
 		if (infinityMode === false) {
-			sliders();
-			updatePositions();
+			if( mode === 'balls'){
+				sliders();
+				updatePositions();
+			}
+			else{
+				customRender( );
+				
+			}
 		} else {
 			if (Math.floor(count % 3.25) === 0) {
 				randBalls = infinityModeFunction();
@@ -509,8 +540,6 @@
 		}
 
 		renderer.render(scene, camera);
-
-		count += 0.1;
 
 	}
 
@@ -756,4 +785,8 @@
 		}
 		return Math.floor(rand);
 
+	}
+
+	function modeDetect( value ){
+		return mode = value;
 	}

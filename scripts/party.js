@@ -1,0 +1,3 @@
+function partyInit(){
+	alert( "PARTY!");
+}

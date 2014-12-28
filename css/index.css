@@ -194,25 +194,35 @@ body #playArea{
 	width: 20%;
 	height: 25%;
 	overflow: hidden;
+	z-index: 0;
 }
 
 #show{
 	position: absolute;
 	height: 30px;
 	width: 30px;
-	right: 20px;
+	right: 10px;
 	text-decoration: none;
 	color: white;
 	font-size: 150%;
 	cursor: pointer;
-	top: -2%;
+	top: -3%;
+	z-index: 1;
 }
 
 #sidr ul li {
 	height: 20%;
+	background-color: #666;
+	border-radius-bottom-right: 10px;
 }
 
 #sidr ul li.opt{
 	height: 30%;
+	background-color: #666;
+}
+
+#sidr ul li.mTitle{
+	font-size: 150%;
+	background-color: #333;
 }
 

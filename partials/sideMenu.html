@@ -1,13 +1,13 @@
 <div id="sidr">
     <ul>
-        <li><strong>Menu</strong>
+        <li class="mTitle"><strong>Menu</strong>
         </li>
         <li class='backColor opt'></li>
         <li class='ballNum opt'></li>
         <li>
             <form class='checkers'>
-                <input type="checkbox" id="fpsCheck" name="checks" value="fps"> FPS on &nbsp;
-                <input type="checkbox" id="timerCheck" name="checks" value="time"> Timer on
+                <input type="checkbox" id="fpsCheck" name="checks" value="fps"> FPS off &nbsp;
+                <input type="checkbox" id="timerCheck" name="checks" value="time"> Timer off
             </form>
         </li>
     </ul>
@@ -20,12 +20,12 @@
         });
 
         $('#show').click(function() {
-            if ($('#show').css('right') === '20px')
+            if ($('#show').css('right') === '10px')
                 setTimeout(function() {
-                    $('#show').css('right', '21%');
-                }, 250);
+                    $('#show').css('right', '18%');
+                }, 200);
             else
-                $('#show').css('right', '20px');
+                $('#show').css('right', '10px');
 
         });
     });

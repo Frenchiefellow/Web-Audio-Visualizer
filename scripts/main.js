@@ -99,6 +99,7 @@
 		$('#hideDisplay').click(function() {
 			if (!$('#playArea').hasClass('hideMe')) {
 				setTimeout(function() {
+					$('#hideDisplay').css('opacity', '.1');
 					$("#playArea").addClass("hideMe");
 					$('#timer').addClass("hideMe");
 					$('#infinity').addClass("hideMe");
@@ -108,6 +109,7 @@
 				}, 500);
 			} else {
 				setTimeout(function() {
+					$('#hideDisplay').css('opacity', '1');
 					$("#playArea").removeClass("hideMe");
 					$("#timer").removeClass("hideMe");
 					$("#infinity").removeClass("hideMe");
@@ -311,9 +313,7 @@
 			infinity.title = "Click to initiate Infinity Mode!";
 			document.body.appendChild(infinity);
 		}
-		/*else{
-					alert( "working");
-				}*/
+	
 
 		animate();
 
@@ -353,9 +353,7 @@
 			restartButton.innerHTML = "New Song?";
 			document.getElementById('playArea').appendChild(restartButton);
 		}
-		/*else{
-					alert( "Working!");
-				}*/
+	
 
 	}
 

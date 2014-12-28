@@ -51,14 +51,14 @@
 		});
 
 		$('body').on('click', '#playArea .btn-success', function() {
-			init3D( X, mode );
+			init3D(X, mode);
 			if ($('#playArea').hasClass('original')) {
 
-				if( mode === 'balls')
+				if (mode === 'balls')
 					$('#playArea').addClass('slideDown', 1000, slide);
-				else{
+				else {
 					$('#playArea').css("display", "none");
-					
+
 				}
 
 				$('.banner').css("display", "none");
@@ -103,6 +103,8 @@
 					$('#timer').addClass("hideMe");
 					$('#infinity').addClass("hideMe");
 					$('#stats').addClass("hideMe");
+					$('#show').addClass("hideMe");
+					$('.menuContainer2').addClass("hideMe");
 				}, 500);
 			} else {
 				setTimeout(function() {
@@ -110,6 +112,8 @@
 					$("#timer").removeClass("hideMe");
 					$("#infinity").removeClass("hideMe");
 					$("#stats").removeClass("hideMe");
+					$('#show').removeClass("hideMe");
+					$('.menuContainer2').removeClass("hideMe");
 				}, 500);
 			}
 		});
@@ -122,6 +126,8 @@
 					$('#timer').addClass("hideMe");
 					$('#hideDisplay').addClass("hideMe");
 					$('#stats').addClass("hideMe");
+					$('#show').addClass("hideMe");
+					$('.menuContainer2').addClass("hideMe");
 				}, 500);
 			} else {
 				setTimeout(function() {
@@ -129,6 +135,8 @@
 					$("#timer").removeClass("hideMe");
 					$('#hideDisplay').removeClass("hideMe");
 					$("#stats").removeClass("hideMe");
+					$('#show').removeClass("hideMe");
+					$('.menuContainer2').removeClass("hideMe");
 				}, 500);
 				$('#ballLabel').text("Balls: " + randBalls);
 			}
@@ -173,7 +181,7 @@
 		});
 		$('.banner').css("display", "none");
 		$('.bottomBanner').css("display", "none");
-		init3D( X, mode );
+		init3D(X, mode);
 		$('#playArea').html("<strong style='font-size: 300%;'>loading...</strong><br>(Large Songs May Take a Few Minutes to Load)<br>");
 		var dropped = event.dataTransfer.files;
 		evented = dropped;
@@ -261,12 +269,12 @@
 		stopButton.innerHTML = "Stop Playing: " + songName;
 		document.getElementById('playArea').appendChild(stopButton);
 		if ($('#playArea').hasClass('original')) {
-			if( mode === 'balls')
-					$('#playArea').addClass('slideDown', 1000, slide);
-				else{
-					$('#playArea').css("display", "none");
-					
-				}
+			if (mode === 'balls')
+				$('#playArea').addClass('slideDown', 1000, slide);
+			else {
+				$('#playArea').css("display", "none");
+
+			}
 
 			$('#hideDisplay').removeClass('hideMe');
 		}
@@ -274,37 +282,38 @@
 		document.removeEventListener('drop', dropSong);
 		document.removeEventListener('dragover', drag);
 
-		if( mode === 'balls'){
+		if (mode === 'balls') {
 			var colorLabel = document.createElement('label');
 			colorLabel.id = 'colorLabel';
 			colorLabel.innerHTML = " Background Color: 0";
 			colorLabel.style.cssText = "text-shadow: 2px 2px 0px #000000; font-size: 100%;";
-			document.getElementById('playArea').appendChild(colorLabel);
+			$('.backColor').append(colorLabel);
 
 			var colorSlider = document.createElement('div');
 			colorSlider.id = 'slider';
 			colorSlider.style.cssText = "text-shadow: 2px 2px 0px #000000;";
-			document.getElementById('playArea').appendChild(colorSlider);
+			$('.backColor').append(colorSlider);
 
 			var ballLabel = document.createElement('label');
 			ballLabel.id = 'ballLabel';
 			ballLabel.innerHTML = " Balls: " + Math.floor(X);
 			ballLabel.style.cssText = "text-shadow: 2px 2px 0px #000000; font-size: 100%;";
-			document.getElementById('playArea').appendChild(ballLabel);
+			$('.ballNum').append(ballLabel);
 
 			var ballSlider = document.createElement('div');
 			ballSlider.id = 'slider2';
 			ballSlider.style.cssText = "text-shadow: 2px 2px 0px #000000;";
-			document.getElementById('playArea').appendChild(ballSlider);
+			$('.ballNum').append(ballSlider);
 
 			var infinity = document.createElement('div');
 			infinity.id = 'infinity';
 			infinity.innerHTML = '&infin;'
 			infinity.title = "Click to initiate Infinity Mode!";
 			document.body.appendChild(infinity);
-		}/*else{
-			alert( "working");
-		}*/
+		}
+		/*else{
+					alert( "working");
+				}*/
 
 		animate();
 
@@ -327,7 +336,7 @@
 		paused = true;
 		animate();
 
-		if( mode === 'balls'){
+		if (mode === 'balls') {
 			$('#playArea').html('');
 			var goButton = document.createElement('p');
 			goButton.id = "go";
@@ -343,14 +352,18 @@
 			restartButton.className = "btn btn-primary";
 			restartButton.innerHTML = "New Song?";
 			document.getElementById('playArea').appendChild(restartButton);
-		}/*else{
-			alert( "Working!");
-		}*/
+		}
+		/*else{
+					alert( "Working!");
+				}*/
 
 	}
 
-	function init3D( balls, mode ) {
-		if( mode === 'balls' ){
+	function init3D(balls, mode) {
+		$('.menuContainer').load('./partials/sideMenuButton.html');
+		$('.menuContainer2').load('./partials/sideMenu.html');
+		$('.sidr').css('height', '0%');
+		if (mode === 'balls') {
 			container = document.createElement('div');
 			document.body.appendChild(container);
 
@@ -408,9 +421,9 @@
 				document.addEventListener( 'touchmove', onDocumentTouchMove, false );*/
 
 			window.addEventListener('resize', onWindowResize, false);
-		}else if (mode === 'party'){
+		} else if (mode === 'party') {
 			partyInit();
-		}else{
+		} else {
 			particles = new Array();
 			customInit();
 
@@ -477,16 +490,24 @@
 	}
 
 	function render() {
+		if ($('#fpsCheck').prop('checked') == true) {
+			$('#stats').addClass('hideMe2');
+		} else 
+			$('#stats').removeClass('hideMe2');
+
+		if ($('#timerCheck').prop('checked') == true) {
+			$('#timer').addClass('hideMe2');
+		} else 
+			$('#timer').removeClass('hideMe2');
 
 		updateTimer();
 		if (infinityMode === false) {
-			if( mode === 'balls'){
+			if (mode === 'balls') {
 				sliders();
 				updatePositions();
-			}
-			else{
-				customRender( );
-				
+			} else {
+				customRender();
+
 			}
 		} else {
 			if (Math.floor(count % 3.25) === 0) {
@@ -527,9 +548,9 @@
 			for (var iy = 0; iy < Y; iy++) {
 				var xX;
 				if (!$('#playArea').hasClass('hideMe'))
-				 	xX = -(100 + 256 - data[ix + sampleRate] * 4);
+					xX = -(100 + 256 - data[ix + sampleRate] * 4);
 				else
-					xX = -( 600 - data[ix + sampleRate] *4);
+					xX = -(600 - data[ix + sampleRate] * 4);
 
 				particle = particles[i++];
 
@@ -787,6 +808,6 @@
 
 	}
 
-	function modeDetect( value ){
+	function modeDetect(value) {
 		return mode = value;
 	}

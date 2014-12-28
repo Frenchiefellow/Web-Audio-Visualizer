@@ -57,6 +57,9 @@ body, html {
 .hideMe{
 	display: none;
 }
+.hideMe2{
+	display: none;
+}
 
 #drop{
 	border: 1px solid white;
@@ -94,36 +97,36 @@ body #playArea{
 }
 
 #slider{
-	width: 15%;
-	position: absolute;
-	left: 10%;
+	width: 75%;
+	/*position: absolute;
+	left: 10%;*/
 	margin: auto;
 	top: 3%;
 }
 
 #colorLabel{
-	width: 15%;
-	position: absolute;
+	width: 75%;
+	/*position: absolute;*/
 	margin: auto;
 	top: 0;
-	left: 10%;
+	/*left: 10%;*/
 	color: white;
 }
 
 #slider2{
-	width: 15%;
-	position: absolute;
-	right: 10%;
+	width: 75%;
+	/*position: absolute;
+	right: 10%;*/
 	margin: auto;
 	top: 3%;
 }
 
 #ballLabel{
-	width: 15%;
-	position: absolute;
+	width: 75%;
+	/*position: absolute;*/
 	margin: auto;
 	top: 0;
-	right: 10%;
+	/*right: 10%;*/
 	color: white;
 }
 
@@ -179,3 +182,37 @@ body #playArea{
 	cursor: pointer;
 
 }
+
+.menuContainer{
+	position: absolute;
+	width: 100%;
+	height: 40%;
+	top: 20px;
+}
+
+#sidr{
+	width: 20%;
+	height: 25%;
+	overflow: hidden;
+}
+
+#show{
+	position: absolute;
+	height: 30px;
+	width: 30px;
+	right: 20px;
+	text-decoration: none;
+	color: white;
+	font-size: 150%;
+	cursor: pointer;
+	top: -2%;
+}
+
+#sidr ul li {
+	height: 20%;
+}
+
+#sidr ul li.opt{
+	height: 30%;
+}
+

@@ -24,4 +24,15 @@ take me to figure out how to do what I want, but I hope it will be very soon.
 <li>"Infinity mode" added to balls mode (random chaos, essentially)</li>
 </ul>
 </li>
+<li>  <strong> 12/27/14 - 12/28/2014: </strong>
+<ul>
+<li>New Menu added for sliders and for hiding timer and FPS views.</li>
+</ul>
+</li>
+<li>  <strong> 1/14/2015: </strong>
+<ul>
+<li>New bottom bar displaying song name and a pause button added. </li>
+<li>Timer removed due to FPS degradation (Timer caused significant performance drops)</li>
+</ul>
+</li>
 </ul>

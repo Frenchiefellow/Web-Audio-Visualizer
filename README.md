@@ -15,7 +15,7 @@ the visualizer output will look like (to a certain extent) and it will be very m
 take me to figure out how to do what I want, but I hope it will be very soon. 
 
 
-<h1> Features / Additions </h1>
+<h1> Features / Additions / Revisions</h1>
 <ul>
 <li>  <strong> 12/11/14: </strong>
 <ul>

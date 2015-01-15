@@ -45,7 +45,7 @@
 		supported();
 		//init3D(X);
 
-		$('body').on('click', '#playArea .btn-danger', function() {
+		$('body').on('click', '#playArea .stopButton', function() {
 			stopSong();
 			$('#infinity').addClass('hideMe');
 		});
@@ -156,6 +156,8 @@
 		setTimeout(function() {
 			$("#playArea").removeClass("original");
 		}, 1500);
+		$("#playArea").css({"background-color" : "rgba(119,119,119,0.15)", "border-top" : "1px solid rgba(119,119,119,0.5)", "z-index" : "0"});
+
 	}
 
 	function supported() {
@@ -205,6 +207,8 @@
 		};
 		reader.readAsArrayBuffer(dropped[0]);
 		songName = dropped[0]["name"];
+
+
 	}
 
 	function loadSong(url) {
@@ -233,6 +237,9 @@
 			}, 3000);
 			console.log(e);
 		});
+
+
+
 	}
 
 	function play() {
@@ -255,25 +262,42 @@
 			started = Date.now();
 			startTime = Date.now();
 
-			var timer = document.createElement('div');
-			timer.id = 'timer';
-			timer.style.cssText = "color: white; position: absolute; top: 3%; width: 100%; text-align: center;";
-			timer.innerHTML = "00:00";
-			document.body.appendChild(timer);
+			
 
 			src.start(0);
+
 		}
 
 		$('#playArea').html('');
-		var stopButton = document.createElement('p');
-		stopButton.id = "stop";
-		stopButton.className = "btn btn-danger";
-		stopButton.innerHTML = "Stop Playing: " + songName;
+		var currentSongName = document.createElement('marquee');
+		currentSongName.id = "currentSongName";
+		currentSongName.className = "CurrentSongName";
+		currentSongName.innerHTML = songName;
+		document.getElementById('playArea').appendChild(currentSongName);
+
+		var stopButton = document.createElement('div');
+		stopButton.id = "stopButton";
+		stopButton.className = "stopButton";
+		stopButton.innerHTML = "&#9616;&#9616;";
+		stopButton.title = "Click to Pause Current Song!"
 		document.getElementById('playArea').appendChild(stopButton);
+
+		var nowPlaying = document.createElement("div");
+		nowPlaying.id = 'nowPlaying';
+		nowPlaying.innerHTML = "Now Playing:";
+		$("#playArea").append(nowPlaying);
+
+		/*var timer = document.createElement('div');
+			timer.id = 'timer';
+			timer.style.cssText = "color: white; position: absolute; top: 0.5%; text-align: center;";
+			timer.innerHTML = "00:00";
+			$("#playArea").append(timer);*/
+
+
 		if ($('#playArea').hasClass('original')) {
-			if (mode === 'balls')
+			if (mode === 'balls'){
 				$('#playArea').addClass('slideDown', 1000, slide);
-			else {
+			}else {
 				$('#playArea').css("display", "none");
 
 			}
@@ -341,7 +365,7 @@
 			var goButton = document.createElement('p');
 			goButton.id = "go";
 			goButton.className = "btn btn-info";
-			goButton.innerHTML = "Continue Playing?";
+			goButton.innerHTML = "Continue?";
 			document.getElementById('playArea').appendChild(goButton);
 
 			var restartButton = document.createElement('p');
@@ -494,11 +518,11 @@
 			$('#stats').removeClass('hideMe2');
 
 		if ($('#timerCheck').prop('checked') == true) {
-			$('#timer').addClass('hideMe2');
+			$('#playArea').addClass('hideMe2');
 		} else 
-			$('#timer').removeClass('hideMe2');
+			$('#playArea').removeClass('hideMe2');
 
-		updateTimer();
+		//updateTimer();
 		if (infinityMode === false) {
 			if (mode === 'balls') {
 				sliders();
@@ -545,7 +569,7 @@
 
 			for (var iy = 0; iy < Y; iy++) {
 				var xX;
-				if (!$('#playArea').hasClass('hideMe'))
+				if (!$('#playArea').hasClass('hideMe') && !$('#playArea').hasClass('hideMe2') )
 					xX = -(100 + 256 - data[ix + sampleRate] * 4);
 				else
 					xX = -(600 - data[ix + sampleRate] * 4);

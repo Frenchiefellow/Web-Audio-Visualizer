@@ -25,11 +25,21 @@ body, html {
 	display: inline-block;
 }
 
-#stop, #restart{
-	top: 2%;
-	cursor : pointer;
+#currentSongName{
+	
 	display: inline-block;
-	margin-left: 2%;
+	 font-family: "Open Sans";
+	 font-weight: 400;
+	 /*font-style: italic;*/
+	 font-size: 40px;
+	 text-shadow: 1px 0px 0px #000;
+	 color: rgba(255, 255, 255, 1);
+	 position: absolute;
+	 top: 0.5%;
+	 left: 35%;
+	 opacity: 0.7;
+	 width: 30%;
+
 }
 
 #songs, #mode{
@@ -45,7 +55,7 @@ body, html {
 
 #hideDisplay{
 	position: absolute;
-	bottom: 20px;
+	bottom: 15px;
 	right: 20px;
 	color: white;
 	height: 20px;
@@ -131,8 +141,18 @@ body #playArea{
 }
 
 #timer{
-	font-size: 200%;
-	text-shadow: 2px 2px 0px #000000;
+	width: 6%;
+	 font-family: "Open Sans";
+	 font-weight: 400;
+	 /*font-style: italic;*/
+	 font-size: 40px;
+	 text-shadow: 1px 0px 0px #000;
+	 color: rgba(255, 255, 255, 1);
+	 position: absolute;
+	 top: 0.5%;
+	 opacity: 0.7;
+	 left: 77%;
+	
 }
 
 .banner{
@@ -173,7 +193,7 @@ body #playArea{
 
 #infinity{
 	position: absolute;
-	bottom: 60px;
+	bottom: 55px;
 	right: 20px;
 	color: white;
 	height: 20px;
@@ -224,5 +244,43 @@ body #playArea{
 #sidr ul li.mTitle{
 	font-size: 150%;
 	background-color: #333;
+}
+
+#nowPlaying{
+	 width: 25%;
+	 font-family: "Open Sans";
+	 font-weight: 400;
+	 font-style: italic;
+	 font-size: 40px;
+	 text-shadow: 1px 0px 0px #000;
+	 color: rgba(255, 255, 255, 1);
+	 position: absolute;
+	 top: 0.5%;
+	 opacity: 0.7;
+
+
+}
+
+#stopButton{
+	position: absolute;
+	left: 83%;
+	top: 1.5%;
+	color: white;
+	font-size: 150%;
+	width: 3%;
+	height: 4%;
+	cursor: pointer;
+}
+
+#go{
+	position: absolute;
+	left: 41%;
+	top: 2%;
+}
+
+#restart{
+	position: absolute;
+	left: 53%;
+	top: 2%;
 }
 

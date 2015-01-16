@@ -45,11 +45,13 @@
 		supported();
 		//init3D(X);
 
+		// Pause Button Functionality
 		$('body').on('click', '#playArea .stopButton', function() {
 			stopSong();
 			$('#infinity').addClass('hideMe');
 		});
 
+		//Play Button Functionality (From Splash Screen)
 		$('body').on('click', '#playArea .btn-success', function() {
 			init3D(X, mode);
 			if ($('#playArea').hasClass('original')) {
@@ -86,7 +88,12 @@
 
 		});
 
+		// Continue Button Functionality (Currently bugged: Seems to double animate/Increases FPS x2)
 		$('body').on('click', '#playArea .btn-info', function() {
+			if ($('.menuContainer').html() === "") {
+				$('.menuContainer').load('./partials/sideMenuButton.html');
+				$('.menuContainer2').load('./partials/sideMenu.html');
+			}
 			if (evented === undefined) {
 				url = './samples/' + songName;
 				loadSong(url);
@@ -96,6 +103,7 @@
 
 		});
 
+		// Hide Display Button Functionality
 		$('#hideDisplay').click(function() {
 			if (!$('#playArea').hasClass('hideMe')) {
 				setTimeout(function() {
@@ -120,6 +128,7 @@
 			}
 		});
 
+		// Infinity Mode Button Functionality
 		$('body').on('click', '#infinity', function() {
 			infinityMode = !infinityMode;
 			if (!$('#playArea').hasClass('hideMe')) {
@@ -145,6 +154,7 @@
 
 		});
 
+		// Disables ability to drag new song into canvas while a song is playing/loaded
 		if (song === false) {
 			document.addEventListener('drop', dropSong, false);
 			document.addEventListener('dragover', drag, false);
@@ -152,14 +162,24 @@
 
 	}
 
+	// Class for animating "slide" of information on Splash to Canvas transition
 	function slide() {
 		setTimeout(function() {
 			$("#playArea").removeClass("original");
-		}, 1500);
-		$("#playArea").css({"background-color" : "rgba(119,119,119,0.15)", "border-top" : "1px solid rgba(119,119,119,0.5)", "z-index" : "0"});
+		}, 1000);
+		$("#playArea").css({
+			"background-color": "rgba(119,119,119,0.15)",
+			"border-top": "1px solid rgba(119,119,119,0.5)",
+			"z-index": "0"
+		});
+		$("#currentSongName").css({
+			"border": "1px solid rgba(119,119,119,0.5)",
+			"background-color": "rgba(136,136,136,0.2)"
+		});
 
 	}
 
+	// Checks for WEBGL/Web Audio API incompatibilities
 	function supported() {
 		if (!window.WebGLRenderingContext) {
 			alert("GET WEBGL FOOL");
@@ -175,6 +195,7 @@
 		}
 	}
 
+	// Functionality for Dropping a Song onto the page
 	function dropSong(event) {
 		event.stopPropagation();
 		event.preventDefault();
@@ -192,25 +213,26 @@
 		var reader = new FileReader();
 		reader.onload = function(e) {
 			var data = e.target.result;
-			droppedLoader(data);
+			droppedLoader(data, 0);
 		};
 		reader.readAsArrayBuffer(dropped[0]);
 		songName = dropped[0]["name"];
 	}
 
-	function reloadDropSong(event) {
-		var dropped = event
+	// Reloads Previously "dropped" song on Resume
+	function reloadDropSong(events) {
+		var dropped = events;
 		var reader = new FileReader();
 		reader.onload = function(e) {
 			var data = e.target.result;
-			droppedLoader(data);
+			droppedLoader(data, 1);
 		};
 		reader.readAsArrayBuffer(dropped[0]);
 		songName = dropped[0]["name"];
 
-
 	}
 
+	// Loads song from Url (local location) and queues Play()
 	function loadSong(url) {
 		var request = new XMLHttpRequest();
 		request.open("GET", url, true);
@@ -219,16 +241,17 @@
 		request.onload = function() {
 			context.decodeAudioData(request.response, function(buffer) {
 				buf = buffer;
-				play();
+				play(0);
 			});
 		}
 		request.send();
 	}
 
-	function droppedLoader(data) {
+	// Loads song from "drop" and queues Play()
+	function droppedLoader(data, val) {
 		context.decodeAudioData(data, function(buffer) {
 			buf = buffer;
-			play();
+			play(val);
 
 		}, function(e) {
 			$('#playArea').html("<strong style='font-size: 300%;'>Cannot Read File...</strong><br>Reloading in 3 seconds...");
@@ -238,11 +261,10 @@
 			console.log(e);
 		});
 
-
-
 	}
 
-	function play() {
+	// Functionality for Playing the song 
+	function play(val) {
 		song = true;
 		passed = false;
 		src = context.createBufferSource();
@@ -261,54 +283,54 @@
 		} else {
 			started = Date.now();
 			startTime = Date.now();
-
-			
-
 			src.start(0);
 
 		}
 
 		$('#playArea').html('');
-		var currentSongName = document.createElement('marquee');
-		currentSongName.id = "currentSongName";
-		currentSongName.className = "CurrentSongName";
-		currentSongName.innerHTML = songName;
-		document.getElementById('playArea').appendChild(currentSongName);
-
-		var stopButton = document.createElement('div');
-		stopButton.id = "stopButton";
-		stopButton.className = "stopButton";
-		stopButton.innerHTML = "&#9616;&#9616;";
-		stopButton.title = "Click to Pause Current Song!"
-		document.getElementById('playArea').appendChild(stopButton);
-
-		var nowPlaying = document.createElement("div");
-		nowPlaying.id = 'nowPlaying';
-		nowPlaying.innerHTML = "Now Playing:";
-		$("#playArea").append(nowPlaying);
-
-		/*var timer = document.createElement('div');
-			timer.id = 'timer';
-			timer.style.cssText = "color: white; position: absolute; top: 0.5%; text-align: center;";
-			timer.innerHTML = "00:00";
-			$("#playArea").append(timer);*/
-
 
 		if ($('#playArea').hasClass('original')) {
-			if (mode === 'balls'){
+			if (mode === 'balls') {
 				$('#playArea').addClass('slideDown', 1000, slide);
-			}else {
+			} else {
 				$('#playArea').css("display", "none");
 
 			}
 
 			$('#hideDisplay').removeClass('hideMe');
 		}
+
 		paused = false;
 		document.removeEventListener('drop', dropSong);
 		document.removeEventListener('dragover', drag);
 
 		if (mode === 'balls') {
+
+			var stopButton = document.createElement('div');
+			stopButton.id = "stopButton";
+			stopButton.className = "stopButton";
+			stopButton.innerHTML = "&#9616;&#9616;";
+			stopButton.title = "Click to Pause Current Song!"
+			document.getElementById('playArea').appendChild(stopButton);
+
+			var nowPlaying = document.createElement("div");
+			nowPlaying.id = 'nowPlaying';
+			nowPlaying.innerHTML = "Now Playing:";
+			$("#playArea").append(nowPlaying);
+
+			var currentSongName = document.createElement('marquee');
+			currentSongName.id = "currentSongName";
+			currentSongName.className = "CurrentSongName";
+			currentSongName.innerHTML = songName;
+			document.getElementById('playArea').appendChild(currentSongName);
+
+			if (val === 1) {
+				$("#currentSongName").css({
+					"border": "1px solid rgba(119,119,119,0.5)",
+					"background-color": "rgba(136,136,136,0.2)"
+				});
+			}
+
 			var colorLabel = document.createElement('label');
 			colorLabel.id = 'colorLabel';
 			colorLabel.innerHTML = " Background Color: 0";
@@ -336,13 +358,14 @@
 			infinity.innerHTML = '&infin;'
 			infinity.title = "Click to initiate Infinity Mode!";
 			document.body.appendChild(infinity);
+
 		}
-	
 
 		animate();
 
 	}
 
+	// Handles Drag over transitions on Splash
 	function drag(evt) {
 		$('#playArea').text("Drop Music here");
 		$('#playArea').css({
@@ -354,14 +377,17 @@
 		return false;
 	}
 
+	// Pauses the song on pause and saves state
 	function stopSong() {
 		src.stop(0);
 		pauseTime = Date.now() - startTime;
 		paused = true;
-		animate();
 
 		if (mode === 'balls') {
+			$('.menuContainer').empty();
+			$('.menuContainer2').empty();
 			$('#playArea').html('');
+
 			var goButton = document.createElement('p');
 			goButton.id = "go";
 			goButton.className = "btn btn-info";
@@ -376,12 +402,14 @@
 			restartButton.className = "btn btn-primary";
 			restartButton.innerHTML = "New Song?";
 			document.getElementById('playArea').appendChild(restartButton);
+
 		}
-	
 
 	}
 
+	// Initializes Canvas of Objects
 	function init3D(balls, mode) {
+		$('.menuContainer').css("z-index", "0");
 		$('.menuContainer').load('./partials/sideMenuButton.html');
 		$('.menuContainer2').load('./partials/sideMenu.html');
 		$('.sidr').css('height', '0%');
@@ -453,6 +481,8 @@
 
 	}
 
+
+	// Handles scaling on window resize
 	function onWindowResize() {
 
 		windowHalfX = window.innerWidth / 2;
@@ -465,8 +495,7 @@
 
 	}
 
-	//
-
+	// Records mouse positions on Mouse events (hover)
 	function onDocumentMouseMove(event) {
 
 		mouseX = event.clientX - windowHalfX;
@@ -500,26 +529,24 @@
 
 	}
 
-	//
-
+	// Animates the Canvas
 	function animate() {
-
 		requestAnimationFrame(animate);
-
 		render();
 		stats.update();
 
 	}
 
+	// Handles rendering of the objects on the Canvas
 	function render() {
 		if ($('#fpsCheck').prop('checked') == true) {
 			$('#stats').addClass('hideMe2');
-		} else 
+		} else
 			$('#stats').removeClass('hideMe2');
 
 		if ($('#timerCheck').prop('checked') == true) {
 			$('#playArea').addClass('hideMe2');
-		} else 
+		} else
 			$('#playArea').removeClass('hideMe2');
 
 		//updateTimer();
@@ -552,6 +579,7 @@
 
 	}
 
+	// Updates the position of the canvas objects with the song
 	function updatePositions() {
 
 		var data = new Uint8Array(sampleSize);
@@ -569,7 +597,7 @@
 
 			for (var iy = 0; iy < Y; iy++) {
 				var xX;
-				if (!$('#playArea').hasClass('hideMe') && !$('#playArea').hasClass('hideMe2') )
+				if (!$('#playArea').hasClass('hideMe') && !$('#playArea').hasClass('hideMe2'))
 					xX = -(100 + 256 - data[ix + sampleRate] * 4);
 				else
 					xX = -(600 - data[ix + sampleRate] * 4);
@@ -586,6 +614,7 @@
 
 	}
 
+	// Produces the next RGB color value for any given color (recursion returns a gradient)
 	function rainbowColors(n, step) {
 		var i = (n * 255 / step);
 		var r = Math.round(Math.sin(0.024 * i + 0) * 127 + 128);
@@ -596,6 +625,7 @@
 
 	};
 
+	// Returns inverted RGB value of input
 	function invertRGB(color) {
 		var v1 = color.split("rgb(");
 		var v2 = v1[1].split(")");
@@ -607,6 +637,7 @@
 
 	}
 
+	// Updates the song time (REMOVED from current version)
 	function updateTimer() {
 
 		setInterval(function() {
@@ -622,6 +653,7 @@
 		}, 1000);
 	}
 
+	// Handles the colorization of the title on the Splash Screen
 	function colorBanner() {
 		var childrens = $("ul li").size();
 		var oneColor = Math.ceil(Math.random() * (255 - childrens) + 1)
@@ -637,6 +669,7 @@
 
 	}
 
+	// Handles functionality of the sliders on the menu
 	function sliders() {
 		var v = X;
 
@@ -759,6 +792,7 @@
 		});
 	}
 
+	// Functionality of Infinity Mode 
 	function infinityModeFunction() {
 		var rand = (Math.random() * 200) + 70;
 		var balls = rand;
@@ -830,6 +864,7 @@
 
 	}
 
+	// Returns the mode to be performed.
 	function modeDetect(value) {
 		return mode = value;
 	}

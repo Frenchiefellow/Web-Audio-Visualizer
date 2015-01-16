@@ -216,7 +216,7 @@ body #playArea{
 	width: 20%;
 	height: 25%;
 	overflow: hidden;
-	z-index: 1;
+	z-index: 0;
 }
 
 #show{
@@ -229,7 +229,7 @@ body #playArea{
 	font-size: 150%;
 	cursor: pointer;
 	top: -3%;
-	z-index: 2;
+	z-index: 1;
 }
 
 #sidr ul li {

@@ -409,7 +409,7 @@
 
 	// Initializes Canvas of Objects
 	function init3D(balls, mode) {
-		$('.menuContainer').css("z-index", "0");
+		$('.menuContainer').css("z-index", "1");
 		$('.menuContainer').load('./partials/sideMenuButton.html');
 		$('.menuContainer2').load('./partials/sideMenu.html');
 		$('.sidr').css('height', '0%');

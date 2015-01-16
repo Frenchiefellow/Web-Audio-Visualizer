@@ -209,7 +209,7 @@ body #playArea{
 	width: 100%;
 	height: 40%;
 	top: 20px;
-	z-index: -1;
+	/**z-index: -1;**/
 }
 
 #sidr{

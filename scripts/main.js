@@ -40,7 +40,7 @@
 	});
 
 	function initialize() {
-
+		$(".menuContainer").css("z-index", "-1");
 		colorBanner();
 		supported();
 		//init3D(X);

@@ -34,12 +34,12 @@
 	<div id="playArea" class="original">
 		<select id="mode" class="splashDrops" name="mode" onchange='modeDetect(this.options[this.selectedIndex].value)'>
 			<option value="balls" selected="selected" >Balls Mode</option>
-			<option value="party">Party Mode</option>
-			<option value="custom">Custom Mode</option>
+			<!-- <option value="party">Party Mode</option>
+			<option value="custom">Custom Mode</option> -->
 		</select>
 		<select id="songs" class="splashDrops" name="songs">
 			<option value="" selected="selected" >I'll drag and drop my own!</option>
-			<option value="sample">Sample!</option>
+		<!--	<option value="sample">Sample!</option> -->
 		</select>
 		<p class= " btn btn-success" id="play"> Play? </p>
 		<div style='height: 20px;'></div>

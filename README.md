@@ -1,6 +1,6 @@
 Web-Audio-Visualizer
 ====================
-webvisualizer.herokuapp.com
+<a href="http://webvisualizer.herokuapp.com/">HOSTED HERE</a>
 
 This is a project I will be working on over the course of however long I decide this project lasts. 
 

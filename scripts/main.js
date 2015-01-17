@@ -473,8 +473,18 @@
 			window.addEventListener('resize', onWindowResize, false);
 		} else if (mode === 'party') {
 			partyInit();
-		} else {
-			particles = new Array();
+		}else if (mode === 'bar'){
+			particles = new Array(X);
+			for( var i = 0; i < X; i++){
+				particles[i] = new Array();
+			}
+			barInit();
+		}
+		 else {
+			particles = new Array(X);
+			for( var i = 0; i < X; i++){
+				particles[i] = new Array();
+			}
 			customInit();
 
 		}
@@ -555,7 +565,7 @@
 				sliders();
 				updatePositions();
 			} else {
-				customRender();
+				barRender();
 
 			}
 		} else {

@@ -10,7 +10,7 @@
 </head>
 
 <body>
-	<div class="banner2">
+	<div class="banner">
 		<ul>
 			<li>W</li><!--
 			--><li>E</li><!--
@@ -31,18 +31,23 @@
 		</ul>
 
 	</div>
-	<div id="playArea" class="original">	
-		
-		<!--<div style='height: 20px;'></div> -->
-		<div class="modeSelect">
-			<span class='modeTitle'>1. Choose a Visualizer:</span>
-			<img class="ballViz choice"src="./resources/ball.png" title='Ball Wave Type Visualizer'>
-			<img class="barViz choice" src="./resources/bar.png" title='Bar Type Visualizer'>
-			<div class="partyViz choice" title='Not Yet Implemented'> Party</div>
-			<div class="customViz choice" title='Not Yet Implemented'>Custom</div>
+	<div id="playArea" class="original">
+		<select id="mode" class="splashDrops" name="mode" onchange='modeDetect(this.options[this.selectedIndex].value)'>
+			<option value="balls" selected="selected" >Balls Mode</option>
+			<option value="party">Party Mode</option>
+			<option value="custom">Custom Mode</option>
+			<option value="bar">Bar Mode</option>
+		</select>
+		<select id="songs" class="splashDrops" name="songs">
+			<option value="" selected="selected" >I'll drag and drop my own!</option>
+			<option value="sample">Sample!</option>
+		</select>
+		<p class= " btn btn-success" id="play"> Play? </p>
+		<div style='height: 20px;'></div>
+		<div id="drop"> 
+			<div id='dragDrop'>or Drag and Drop Music File Here:</div>
+			<div id='warning'>Files larger than 60 minutes appear to break the site...</div>
 		</div>
-		<div class="dropHolder"></div>
-
 	</div>
 	<div class="bottomBanner">
 		<span> Designed by Frenchiefellow || 

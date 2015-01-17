@@ -1,6 +1,6 @@
 function barInit(){
 
-			X = 25, Y = 27;
+			X = 30, Y = 27;
 			spacing = Math.floor(window.innerWidth / X * 1.25);
 			container = document.createElement('div');
 			document.body.appendChild(container);

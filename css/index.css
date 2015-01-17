@@ -16,7 +16,7 @@ body, html {
 .original{
 	position: absolute;
 	margin: 0 auto;
-	top: 40%;
+	top: 20%;
 	width: 100%;
 	color: white;
 }
@@ -76,7 +76,7 @@ body, html {
 	border: 1px solid white;
 	border-radius: 2px;
 	width: 50%;
-	height: 25%;
+	height: 35%;
 	margin: 0 auto;
 	text-align: center;
 	position: relative;
@@ -156,22 +156,74 @@ body #playArea{
 	
 }
 
-.banner{
+.banner2{
 	width: 100%;
 	height: 20%;
 	text-align: center;
 	position: absolute;
 	color: white;
-	top: 20%;
+	top: 0%;
 	font-size: 800%;
 	font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
 
 }
-.banner li{
+
+.banner2 li{
 	display: inline-block;
 	text-align: center;
 }
 
+.choice{
+	position: absolute;
+	display: inline-block;
+	text-align: center;
+	top: 5%;
+	width: 20%;
+	height: 25%;
+	opacity: 0.5;
+}
+
+.choice:hover{
+	border: 2px solid white;
+	border-radius: 5px;
+}
+
+
+.modeSelect{
+	text-align: center;
+	width: 100%;
+	height: 33%;
+	
+}
+
+.modeTitle{
+	 font-family: "Open Sans";
+	 font-weight: 400;
+	 font-size: 30px;
+	 text-shadow: 1px 0px 0px #000;
+	 color: rgba(255, 255, 255, 1);
+
+}
+
+.ballViz{
+	left: 6%;
+}
+
+.barViz{
+	left : 29%;
+
+
+}
+
+.partyViz{
+	left : 52%;
+	background-color: #808080;
+}
+
+.customViz{
+	left : 75%;
+	background-color: #808080;
+}
 .bottomBanner{
 	position: absolute;
 	width: 100%;

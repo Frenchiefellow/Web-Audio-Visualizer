@@ -1,6 +1,6 @@
 	var songName;
 	var url;
-	var mode = 'balls';
+	var mode;
 	var context = new AudioContext();
 	var buf;
 	var src;
@@ -45,6 +45,29 @@
 		supported();
 		//init3D(X);
 
+		$('body').on('click', '#playArea .choice', function() {
+			$('.choice').css("border", "");
+			$('.choice').css("opacity", "0.1")
+			$(this).css({"border" : "2px solid white", "border-radius" : "5px", "opacity" : "1"});
+			mode = $(this).attr("class");
+			switch( mode ){
+				case "ballViz choice":
+					mode = "balls";
+					break;
+				case "barViz choice":
+					mode = "bar";
+					break;
+				case "partyViz choice":
+					mode = "party";
+					break;
+				case "customViz choice":
+					mode = "custom";
+					break;
+			}
+			$('.dropHolder').load('./partials/dropper.html');
+		});
+
+
 		// Pause Button Functionality
 		$('body').on('click', '#playArea .stopButton', function() {
 			stopSong();
@@ -63,7 +86,7 @@
 
 				}
 
-				$('.banner').css("display", "none");
+				$('.banner2').css("display", "none");
 				$('.bottomBanner').css("display", "none");
 				if (evented === undefined) {
 					songName = $('#songs :selected').val();
@@ -74,11 +97,11 @@
 				}
 				song = true;
 				$('#hideDisplay').removeClass('hideMe');
-				$('.banner').css("display", "none");
+				$('.banner2').css("display", "none");
 				$('.bottomBanner').css("display", "none");
 
 			} else {
-				$('.banner').css("display", "none");
+				$('.banner2').css("display", "none");
 				$('.bottomBanner').css("display", "none");
 				songName = $('#songs :selected').val();
 				url = './samples/' + songName;
@@ -204,7 +227,7 @@
 			'border': "",
 			'border-radius': ""
 		});
-		$('.banner').css("display", "none");
+		$('.banner2').css("display", "none");
 		$('.bottomBanner').css("display", "none");
 		init3D(X, mode);
 		$('#playArea').html("<strong style='font-size: 300%;'>loading...</strong><br>(Large Songs May Take a Few Minutes to Load)<br>");

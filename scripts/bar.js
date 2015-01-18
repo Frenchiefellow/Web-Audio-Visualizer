@@ -1,6 +1,6 @@
 function barInit(){
 
-			X = 30, Y = 27;
+			X = 33, Y = 27;
 			spacing = Math.floor(window.innerWidth / X * 1.25);
 			container = document.createElement('div');
 			document.body.appendChild(container);
@@ -15,7 +15,7 @@ function barInit(){
 				for (var iy = 0; iy < Y; iy++) {
 					
 					var material = new THREE.SpriteCanvasMaterial({
-						color: "rgb(255, 255, 255)",
+						color: "rgb(0, 0, 0)",
 						program: function(context) {
 							context.beginPath();
 							context.rect(0, 0 , (window.innerWidth / X), window.innerHeight / (Y*2));
@@ -26,13 +26,14 @@ function barInit(){
 						}
 
 					});
-				
+					
 
 					particle = particles[ix][iy] = new THREE.Sprite(material);
-					particle.position.x = ix * spacing - ((X * spacing) / 2);
+					particle.position.x = ix * spacing - ((X * spacing) / 2) + 50;
 					particle.position.y = -700 + (50*iy);
-					particle.position.z = iy - ((Y) / 2);
-					scene.add(particle);
+					//particle.position.z = iy - ((Y) / 2);
+					if( ix !== (X-2))
+						scene.add(particle);
 			
 
 				}
@@ -50,9 +51,11 @@ function barInit(){
 			stats.domElement.style.top = '0px';
 			container.appendChild(stats.domElement);
 
-			/* document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-				document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-				document.addEventListener( 'touchmove', onDocumentTouchMove, false );*/
+	
+
+			//document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+			/*document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+			document.addEventListener( 'touchmove', onDocumentTouchMove, false );*/
 
 			window.addEventListener('resize', onWindowResize, false);
 }
@@ -68,7 +71,7 @@ function barRender(){
 		camera.position.y += (-mouseY - camera.position.y) * .05;
 		camera.lookAt(scene.position);
 		var colored = 40;
-		for (var ix = 0; ix < X; ix++) {
+		for (var ix = 0; ix < (X-1); ix++) {
 			for (var iy = 0; iy < Y; iy++) {
 				val = data[ix + sampleRate];
 				var percentage = ( val / maxCap);
@@ -89,13 +92,3 @@ function barRender(){
 
 		renderer.render(scene, camera);
 }
-
-function rainbowColors(n, step) {
-		var i = (n * 255 / step);
-		var r = Math.round(Math.sin(0.024 * i + 0) * 127 + 128);
-		var g = Math.round(Math.sin(0.024 * i + 2) * 127 + 128);
-		var b = Math.round(Math.sin(0.024 * i + 4) * 127 + 128);
-
-		return 'rgb(' + r + ',' + g + ',' + b + ')';
-
-	};

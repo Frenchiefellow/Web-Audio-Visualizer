@@ -383,6 +383,18 @@
 			document.body.appendChild(infinity);
 
 		}
+		if( mode === 'bar'){
+			$('.backColor').append("<div style='height:20%'></div> ")
+			var mouseMoves = document.createElement("form");
+			mouseMoves.id = 'moveMouse';
+			mouseMoves.style.cssText = "height: 30%";
+			mouseMoves.innerHTML = '<input type="checkbox" id="mm" name="checks" value="mm"> Enable Mouse Interaction';
+			$('.backColor').append( mouseMoves );
+
+			$('.ballNum').html("<div style='height: 20%;'></div>Click Here to Snap to Front");
+			$('.ballNum').css({"text-align" : "center", "background-color" : "#333", "opacity" : "0.7", "cursor" : "pointer"});
+
+		}
 
 		animate();
 
@@ -432,6 +444,11 @@
 
 	// Initializes Canvas of Objects
 	function init3D(balls, mode) {
+		
+		if (mode === undefined)
+			mode = "balls";
+
+
 		$('.menuContainer').css("z-index", "");
 		$('.menuContainer').load('./partials/sideMenuButton.html');
 		$('.menuContainer2').load('./partials/sideMenu.html');
@@ -495,6 +512,10 @@
 
 			window.addEventListener('resize', onWindowResize, false);
 		} else if (mode === 'party') {
+			particles = new Array(X);
+			for( var i = 0; i < X; i++){
+				particles[i] = new Array();
+			}
 			partyInit();
 		}else if (mode === 'bar'){
 			particles = new Array(X);
@@ -582,14 +603,27 @@
 		} else
 			$('#playArea').removeClass('hideMe2');
 
+		if( $('#mm').prop('checked') == true )
+			 document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+		else
+			document.removeEventListener('mousemove', onDocumentMouseMove, false );
+
 		//updateTimer();
 		if (infinityMode === false) {
 			if (mode === 'balls') {
 				sliders();
 				updatePositions();
-			} else {
+			} else if( mode === 'bar') {
+				$('body').on('click', '#sidr .ballNum', function() {
+					camera.position.x = mouseX = 0;
+					camera.position.y = mouseY = 0;
+					camera.position.z = 1000;
+				});
 				barRender();
-
+			}else if( mode === "party"){
+				partyRender();
+			}else{
+				customRender();
 			}
 		} else {
 			if (Math.floor(count % 3.25) === 0) {

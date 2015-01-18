@@ -33,6 +33,7 @@
 	var infinityMode = false;
 	var count = 0;
 	var randBalls;
+	var rocker;
 
 	$(document).ready(function() {
 		$('body').css("background-color", "black");
@@ -388,7 +389,7 @@
 			var mouseMoves = document.createElement("form");
 			mouseMoves.id = 'moveMouse';
 			mouseMoves.style.cssText = "height: 30%";
-			mouseMoves.innerHTML = '<input type="checkbox" id="mm" name="checks" value="mm"> Enable Mouse Interaction';
+			mouseMoves.innerHTML = '<input type="checkbox" id="mm" name="checks" value="mm"> Enable Mouse Interaction &nbsp; <input type="checkbox" id="rock" name="checks" value="rock"> Auto Camera Rotate';
 			$('.backColor').append( mouseMoves );
 
 			$('.ballNum').html("<div style='height: 20%;'></div>Click Here to Snap to Front");
@@ -619,7 +620,12 @@
 					camera.position.y = mouseY = 0;
 					camera.position.z = 1000;
 				});
-				barRender();
+				if ($('#rock').prop('checked') == true) 
+					rocker = true;
+				else
+					rocker = false;
+
+				barRender(rocker);
 			}else if( mode === "party"){
 				partyRender();
 			}else{

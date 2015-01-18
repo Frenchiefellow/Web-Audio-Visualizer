@@ -60,7 +60,7 @@ function barInit(){
 			window.addEventListener('resize', onWindowResize, false);
 }
 
-function barRender(){
+function barRender( rocker ){
 		var data = new Uint8Array(sampleSize);
 		analysizer.getByteFrequencyData(data);
 
@@ -74,6 +74,8 @@ function barRender(){
 		for (var ix = 0; ix < (X-1); ix++) {
 			for (var iy = 0; iy < Y; iy++) {
 				val = data[ix + sampleRate];
+	
+
 				var percentage = ( val / maxCap);
 				var position = Math.round( Y * percentage);
 				var colorInit = Math.round( 13 * percentage);
@@ -86,9 +88,21 @@ function barRender(){
 					if( iy % 2 == 0)
 					colored--;
 
+
 			}
 			colored = 40;
-		}
+		}		
+				if( rocker === true ){
+					var currentSeconds = Date.now();
+					camera.rotation.x = Math.sin( currentSeconds * 0.0005 ) * 0.2;
+					camera.rotation.y = Math.sin( currentSeconds * 0.0003 ) * 0.2;
+					//camera.rotation.z = Math.sin( currentSeconds * 0.0001 ) * 0.2;
+				}
+
+	
+
+	
+
 
 		renderer.render(scene, camera);
 }

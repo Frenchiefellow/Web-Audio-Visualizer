@@ -1,15 +1,9 @@
 <div id="sidr">
     <ul>
-        <li class="mTitle"><strong>Menu</strong>
-        </li>
+        <li class="mTitle"><strong>Menu</strong></li>
         <li class='backColor opt'></li>
         <li class='ballNum opt'></li>
-        <li>
-            <form class='checkers'>
-                <input type="checkbox" id="fpsCheck" name="checks" value="fps"> FPS off &nbsp;
-                <input type="checkbox" id="timerCheck" name="checks" value="time"> Display Bar Off
-            </form>
-        </li>
+        <li class='fourthLi'></li>
     </ul>
 </div>
 
@@ -28,5 +22,19 @@
                 $('#show').css('right', '10px');
 
         });
+
+        modeCheck();
+      
     });
+
+    function modeCheck(){
+        var spacers = '<div style="height: 15%;"></div>';
+        var html = '<form class="checkers"><input type="checkbox" id="fpsCheck" name="checks" value="fps"> FPS off &nbsp; &nbsp;<input type="checkbox" id="timerCheck" name="checks" value="time"> Display Bar Off</form>';
+        if( mode === 'balls')
+            $('.fourthLi').append( html );
+        else{
+            $('.ballNum').append( spacers + html );
+          
+        }
+    }
 </script>

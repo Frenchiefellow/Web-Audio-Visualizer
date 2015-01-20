@@ -221,6 +221,9 @@
 
 	// Functionality for Dropping a Song onto the page
 	function dropSong(event) {
+		if( mode === undefined)
+			mode = 'bar';
+
 		event.stopPropagation();
 		event.preventDefault();
 
@@ -392,8 +395,8 @@
 			mouseMoves.innerHTML = '<input type="checkbox" id="mm" name="checks" value="mm"> Enable Mouse Interaction &nbsp; <input type="checkbox" id="rock" name="checks" value="rock"> Auto Camera Rotate';
 			$('.backColor').append( mouseMoves );
 
-			$('.ballNum').html("<div style='height: 20%;'></div>Click Here to Snap to Front");
-			$('.ballNum').css({"text-align" : "center", "background-color" : "#333", "opacity" : "0.7", "cursor" : "pointer"});
+			$('.fourthLi').html("Click Here to Snap to Front");
+			$('.fourthLi').css({"text-align" : "center", "background-color" : "#333", "opacity" : "0.7", "cursor" : "pointer"});
 
 		}
 
@@ -445,9 +448,7 @@
 
 	// Initializes Canvas of Objects
 	function init3D(balls, mode) {
-		
-		if (mode === undefined)
-			mode = "balls";
+
 
 
 		$('.menuContainer').css("z-index", "");
@@ -615,15 +616,18 @@
 				sliders();
 				updatePositions();
 			} else if( mode === 'bar') {
-				$('body').on('click', '#sidr .ballNum', function() {
-					camera.position.x = mouseX = 0;
-					camera.position.y = mouseY = 0;
-					camera.position.z = 1000;
-				});
-				if ($('#rock').prop('checked') == true) 
+				if( $('#rock').prop('checked') == true){
 					rocker = true;
-				else
+					$('.fourthLi').css({"cursor" : "not-allowed", "text-decoration" : "line-through"});
+				}else{
 					rocker = false;
+					$('.fourthLi').css({"cursor" : "pointer", "text-decoration" : "none"});
+					$('body').on('click', '#sidr .fourthLi', function() {
+						camera.position.x = mouseX = 0;
+						camera.position.y = mouseY = 0;
+						camera.position.z = 1000;
+					});
+				}
 
 				barRender(rocker);
 			}else if( mode === "party"){

@@ -88,16 +88,16 @@ function barRender( rocker ){
 					if( iy % 2 == 0)
 					colored--;
 
-
-			}
-			colored = 40;
-		}		
 				if( rocker === true ){
 					var currentSeconds = Date.now();
 					camera.rotation.x = Math.sin( currentSeconds * 0.0005 ) * 0.2;
 					camera.rotation.y = Math.sin( currentSeconds * 0.0003 ) * 0.2;
-					//camera.rotation.z = Math.sin( currentSeconds * 0.0001 ) * 0.2;
+					//camera.rotation.z = Math.sin( currentSeconds * 0.0001 ) * (val / 1000 );
 				}
+			}
+			colored = 40;
+		}		
+				
 
 	
 

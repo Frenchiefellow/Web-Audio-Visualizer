@@ -1,5 +1,6 @@
 var radius;
 var angle = 15 * Math.PI / 180;
+var stars = new Array();
 
 function webInit() {
 
@@ -73,7 +74,7 @@ function webInit() {
 
 		});
 
-		particle = new THREE.Sprite(material);
+		particle = stars[i] = new THREE.Sprite(material);
 		particle.position.x = Math.random() * 2000 - 1000;
 		particle.position.y = Math.random() * 2000 - 1000;
 		particle.position.z = Math.random() * 2000 - 1000;
@@ -119,6 +120,11 @@ function webRender() {
 			angle += 15 * Math.PI / 180;
 		}
 	}
+
+	var currentSeconds = Date.now();
+	camera.rotation.x = Math.sin( currentSeconds * 0.0005 ) * 0.2;
+	camera.rotation.y = Math.sin( currentSeconds * 0.0003 ) * 0.2;
+
 
 	renderer.render(scene, camera);
 }

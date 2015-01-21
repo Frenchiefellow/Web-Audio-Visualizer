@@ -49,7 +49,7 @@
 		//init3D(X);
 
 		$('body').on('click', '#playArea .information', function() {
-
+			var info = $(this).attr("id");
 		});
 
 		$('body').on('click', '#playArea .choice', function() {
@@ -67,8 +67,8 @@
 				case "webViz choice":
 					mode = "web";
 					break;
-				case "customViz choice":
-					mode = "custom";
+				case "spaceViz choice":
+					mode = "space";
 					break;
 			}
 			$('.dropHolder').load('./partials/dropper.html');
@@ -529,11 +529,7 @@
 			barInit();
 		}
 		 else {
-			particles = new Array(X);
-			for( var i = 0; i < X; i++){
-				particles[i] = new Array();
-			}
-			customInit();
+			spaceInit();
 
 		}
 
@@ -635,7 +631,7 @@
 			}else if( mode === "web"){
 				webRender();
 			}else{
-				customRender();
+				spaceRender();
 			}
 		} else {
 			if (Math.floor(count % 3.25) === 0) {

@@ -54,8 +54,8 @@
 				</div>
 				<div class="wSpacer col-sm-1"></div>
 				<div class="col-sm-3 fixMe">
-					<div class="customViz choice">Custom</div>
-					<span class="information" id="iCustom" title="Not Yet Implemented!">i</span>
+					<img class="spaceViz choice"src="./resources/space.png">
+					<span class="information" id="iCustom" title="Space Type Visualizer! &#13; Not much of a visualizer yet, but is still in development!!!">i</span>
 				</div>
 
 				<div class="wSpacer col-sm-1"></div>
@@ -80,7 +80,7 @@
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src='./scripts/jquery/jquery-ui.js'></script>
 <script src='./scripts/main.js'></script> 
-<script src='./scripts/custom.js'></script> 
+<script src='./scripts/space.js'></script> 
 <script src='./scripts/web.js'></script> 
 <script src='./scripts/bar.js'></script> 
 <script src='./three/build/three.js'></script>

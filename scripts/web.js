@@ -84,10 +84,9 @@ function webInit() {
 	}
 
 	group = new THREE.Group();
-	scene.add( group );
+	scene.add(group);
 
 	planetLoader();
-
 
 	renderer = new THREE.CanvasRenderer();
 	renderer.setSize(window.innerWidth, window.innerHeight);
@@ -129,28 +128,30 @@ function webRender() {
 	}
 
 	var currentSeconds = Date.now();
-	camera.rotation.x = Math.sin( currentSeconds * 0.0005 ) * 0.2;
-	camera.rotation.y = Math.sin( currentSeconds * 0.0003 ) * 0.2;
-	camera.rotation.z = Math.sin( currentSeconds * 0.0003 ) * 0.8;
-
+	camera.rotation.x = Math.sin(currentSeconds * 0.0005) * 0.2;
+	camera.rotation.y = Math.sin(currentSeconds * 0.0003) * 0.2;
+	camera.rotation.z = Math.sin(currentSeconds * 0.0003) * 0.8;
 
 	renderer.render(scene, camera);
 }
 
-function planetLoader(){
+function planetLoader() {
 	var earthLoader = new THREE.TextureLoader();
-				earthLoader.load( './three/examples/textures/planets/earth_atmos_2048.jpg', function ( texture ) {
+	earthLoader.load('./three/examples/textures/planets/earth_atmos_2048.jpg', function(texture) {
 
-					var geometry = new THREE.SphereGeometry( 20, 20, 20 );
-					var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
-					var mesh = new THREE.Mesh( geometry, material );
-					mesh.position.x = Math.random() * 2000 - 1000;
-					mesh.position.y = Math.random() * 2000 - 1000;
-					while( mesh.position.x < 100 || mesh.position.y < 100){
-						mesh.position.x = Math.random() * 2000 - 1000;
-						mesh.position.y = Math.random() * 2000 - 1000;
-					}
-					group.add( mesh );
+		var geometry = new THREE.SphereGeometry(20, 20, 20);
+		var material = new THREE.MeshBasicMaterial({
+			map: texture,
+			overdraw: 0.5
+		});
+		var mesh = new THREE.Mesh(geometry, material);
+		mesh.position.x = Math.random() * 2000 - 1000;
+		mesh.position.y = Math.random() * 2000 - 1000;
+		while (mesh.position.x < 100 || mesh.position.y < 100) {
+			mesh.position.x = Math.random() * 2000 - 1000;
+			mesh.position.y = Math.random() * 2000 - 1000;
+		}
+		group.add(mesh);
 
-				} );
+	});
 }

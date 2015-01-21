@@ -1,6 +1,7 @@
 var radius;
 var angle = 15 * Math.PI / 180;
 var stars = new Array();
+var group;
 
 function webInit() {
 
@@ -82,6 +83,12 @@ function webInit() {
 		scene.add(particle);
 	}
 
+	group = new THREE.Group();
+	scene.add( group );
+
+	planetLoader();
+
+
 	renderer = new THREE.CanvasRenderer();
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	var canvasColor = '#000000';
@@ -128,4 +135,22 @@ function webRender() {
 
 
 	renderer.render(scene, camera);
+}
+
+function planetLoader(){
+	var earthLoader = new THREE.TextureLoader();
+				earthLoader.load( './three/examples/textures/planets/earth_atmos_2048.jpg', function ( texture ) {
+
+					var geometry = new THREE.SphereGeometry( 20, 20, 20 );
+					var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
+					var mesh = new THREE.Mesh( geometry, material );
+					mesh.position.x = Math.random() * 2000 - 1000;
+					mesh.position.y = Math.random() * 2000 - 1000;
+					while( mesh.position.x < 100 || mesh.position.y < 100){
+						mesh.position.x = Math.random() * 2000 - 1000;
+						mesh.position.y = Math.random() * 2000 - 1000;
+					}
+					group.add( mesh );
+
+				} );
 }

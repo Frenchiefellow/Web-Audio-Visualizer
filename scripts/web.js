@@ -124,6 +124,7 @@ function webRender() {
 	var currentSeconds = Date.now();
 	camera.rotation.x = Math.sin( currentSeconds * 0.0005 ) * 0.2;
 	camera.rotation.y = Math.sin( currentSeconds * 0.0003 ) * 0.2;
+	camera.rotation.z = Math.sin( currentSeconds * 0.0003 ) * 0.8;
 
 
 	renderer.render(scene, camera);

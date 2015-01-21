@@ -37,6 +37,8 @@
 
 	$(document).ready(function() {
 		$('body').css("background-color", "black");
+		$('.wSpacer').css("width", "4%");
+		$('.fixMe').css("width", "20%");
 		initialize();
 	});
 
@@ -45,6 +47,10 @@
 		colorBanner();
 		supported();
 		//init3D(X);
+
+		$('body').on('click', '#playArea .information', function() {
+
+		});
 
 		$('body').on('click', '#playArea .choice', function() {
 			$('.choice').css("border", "");
@@ -58,8 +64,8 @@
 				case "barViz choice":
 					mode = "bar";
 					break;
-				case "partyViz choice":
-					mode = "party";
+				case "webViz choice":
+					mode = "web";
 					break;
 				case "customViz choice":
 					mode = "custom";
@@ -513,12 +519,8 @@
 				document.addEventListener( 'touchmove', onDocumentTouchMove, false );*/
 
 			window.addEventListener('resize', onWindowResize, false);
-		} else if (mode === 'party') {
-			particles = new Array(X);
-			for( var i = 0; i < X; i++){
-				particles[i] = new Array();
-			}
-			partyInit();
+		} else if (mode === 'web') {
+			webInit();
 		}else if (mode === 'bar'){
 			particles = new Array(X);
 			for( var i = 0; i < X; i++){
@@ -630,8 +632,8 @@
 				}
 
 				barRender(rocker);
-			}else if( mode === "party"){
-				partyRender();
+			}else if( mode === "web"){
+				webRender();
 			}else{
 				customRender();
 			}

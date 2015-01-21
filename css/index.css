@@ -76,14 +76,14 @@ body, html {
 	border: 1px solid white;
 	border-radius: 2px;
 	width: 50%;
-	height: 35%;
+	height: 90%;
 	margin: 0 auto;
 	text-align: center;
 	position: relative;
 }
 
 body #playArea{
-	height: 100%;
+	height: 75%;
 	margin: 0 auto;
 	text-align: center;
 	font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -174,12 +174,11 @@ body #playArea{
 }
 
 .choice{
-	position: absolute;
 	display: inline-block;
 	text-align: center;
 	top: 5%;
-	width: 20%;
-	height: 25%;
+	width: 100%;
+	height: 90%;
 	opacity: 0.5;
 }
 
@@ -205,25 +204,10 @@ body #playArea{
 
 }
 
-.ballViz{
-	left: 6%;
-}
-
-.barViz{
-	left : 29%;
-
-
-}
-
-.partyViz{
-	left : 52%;
-	background-color: #808080;
-}
-
 .customViz{
-	left : 75%;
 	background-color: #808080;
 }
+
 .bottomBanner{
 	position: absolute;
 	width: 100%;
@@ -338,4 +322,37 @@ body #playArea{
 	top: 2%;
 }
 
+.information{
+	color: white;
+	font-size: 125%;
+	position: absolute;
+	height: 8%;
+	width: 4%;
+	cursor: help;
+	bottom: 17%;
+	right: 10%;
+	z-index: 3;
 
+}
+
+.modeHolder{
+	width: 100%;
+	height: 90%;
+	margin: 0 auto;
+}
+
+.wSpacer{
+	width: 5%;
+}
+
+.fixMe{
+	height: 97%;
+	top: 5%;
+}
+
+.dropHolder{
+	position: absolute;
+	width: 100%;
+	height: 60%;
+	top: 42%;
+}

@@ -36,10 +36,31 @@
 		<!--<div style='height: 20px;'></div> -->
 		<div class="modeSelect">
 			<span class='modeTitle'>1. Choose a Visualizer:</span>
-			<img class="ballViz choice"src="./resources/ball.png" title='Ball Wave Type Visualizer'>
-			<img class="barViz choice" src="./resources/bar.png" title='Bar Type Visualizer'>
-			<div class="partyViz choice" title='Not Yet Implemented'> Party</div>
-			<div class="customViz choice" title='Not Yet Implemented'>Custom</div>
+			<div class="modeHolder row">
+				<div class="wSpacer col-xs-1"></div>
+				<div class="col-sm-3 fixMe">
+					<img class="ballViz choice"src="./resources/ball.png">
+					<span class="information" id="iBall" title="Ball Wave Type Visualizer! &#13;Watch as the balls travel the peaks of the song!&#13;Features: Random colored balls, togglable song display, change number of balls, change background/ball colors!">i</span>
+				</div>
+				<div class="wSpacer col-xs-1"></div>
+				<div class="col-sm-3 fixMe">
+					<img class="barViz choice" src="./resources/bar.png">
+					<span class="information" id="iBar" title="Traditional Bar Type Visualizer!&#13;Features: Mouse rotation control and auto rotation control!">i</span>
+				</div>
+				<div class="wSpacer col-sm-1"></div>
+				<div class="col-sm-3 fixMe">
+					<img class="webViz choice"src="./resources/warp.png">
+					<span class="information" id="iWeb" title="Warp/Web Type Visualizer!&#13;Watch the warp/web take form in it's spacey environment!">i</span>
+				</div>
+				<div class="wSpacer col-sm-1"></div>
+				<div class="col-sm-3 fixMe">
+					<div class="customViz choice">Custom</div>
+					<span class="information" id="iCustom" title="Not Yet Implemented!">i</span>
+				</div>
+
+				<div class="wSpacer col-sm-1"></div>
+			
+			</div>
 		</div>
 		<div class="dropHolder"></div>
 
@@ -60,13 +81,14 @@
 <script src='./scripts/jquery/jquery-ui.js'></script>
 <script src='./scripts/main.js'></script> 
 <script src='./scripts/custom.js'></script> 
-<script src='./scripts/party.js'></script> 
+<script src='./scripts/web.js'></script> 
 <script src='./scripts/bar.js'></script> 
 <script src='./three/build/three.js'></script>
 <script src="./three/examples/js/renderers/Projector.js"></script>
 <script src="./three/examples/js/renderers/CanvasRenderer.js"></script>
 <script src="./three/examples/js/libs/stats.min.js"></script>
 <script src="./sidr/jquery.sidr.min.js"></script> 
+
 
 
 </html>

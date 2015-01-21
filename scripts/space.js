@@ -50,7 +50,7 @@ function spaceInit() {
 		angle += 15 * Math.PI / 180;
 
 	}*/
-	var material1 = new THREE.MeshBasicMaterial({
+	/*var material1 = new THREE.MeshBasicMaterial({
 			color: 0xffffff,
 			program: function(context) {
 				context.beginPath();
@@ -67,7 +67,7 @@ function spaceInit() {
 		particle.position.y = Math.random() * 3000 - 1000;
 		particle.position.z = Math.random() * 3000 - 2000;
 		scene.add(particle);
-	}
+	}*/
 
 
 			

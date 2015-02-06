@@ -50,7 +50,7 @@ function spaceInit() {
 		angle += 15 * Math.PI / 180;
 
 	}*/
-	/*var material1 = new THREE.MeshBasicMaterial({
+	var material1 = new THREE.MeshBasicMaterial({
 			color: 0xffffff,
 			program: function(context) {
 				context.beginPath();
@@ -67,7 +67,7 @@ function spaceInit() {
 		particle.position.y = Math.random() * 3000 - 1000;
 		particle.position.z = Math.random() * 3000 - 2000;
 		scene.add(particle);
-	}*/
+	}
 
 
 			
@@ -94,7 +94,7 @@ function spaceInit() {
 	}
 
 
-	planetLoader();
+	//planetLoader();
 	sunLoader();
 
 	renderer = new THREE.WebGLRenderer({
@@ -146,36 +146,16 @@ function spaceRender() {
 	renderer.render(scene, camera);
 }
 
-function planetLoader() {
-	var earthLoader = new THREE.TextureLoader();
-	earthLoader.load('./three/examples/textures/planets/earth_atmos_2048.jpg', function(texture) {
-
-		var geometry = new THREE.SphereGeometry(20, 20, 20);
-		var material = new THREE.MeshBasicMaterial({
-			map: texture,
-			overdraw: 0.5
-		});
-		var mesh = new THREE.Mesh(geometry, material);
-		mesh.position.x = Math.random() * 2000 - 1000;
-		mesh.position.y = Math.random() * 2000 - 1000;
-		mesh.position.z = -1000;
-		while (mesh.position.x < 100 || mesh.position.y < 100) {
-			mesh.position.x = Math.random() * 2000 - 1000;
-			mesh.position.y = Math.random() * 2000 - 1000;
-		}
-		group.add(mesh);
-
-	});
-}
-
 function sunLoader() {
 	var textureFlare0 = THREE.ImageUtils.loadTexture("./three/examples/textures/lensflare/lensflare0.png");
 	var textureFlare3 = THREE.ImageUtils.loadTexture("./three/examples/textures/lensflare/lensflare3.png");
 
-	addLight(0.08, 0.8, 0.5, 0, 0, -1000);
+	addLight(0.08, 0.8, 0.5, 0, 0, -1000, textureFlare0, textureFlare3);
+
+}
 
 
-	function addLight(h, s, l, x, y, z) {
+function addLight(h, s, l, x, y, z, textureFlare0, textureFlare3) {
 
 		var light = new THREE.PointLight(0xffffff, 1.5, 4500);
 		light.color.setHSL(h, s, l);
@@ -197,8 +177,6 @@ function sunLoader() {
 
 		scene.add(lensFlare);
 	}
-
-}
 
 function lensFlareUpdateCallback(object) {
 

@@ -86,7 +86,7 @@ function webInit() {
 	group = new THREE.Group();
 	scene.add(group);
 
-	planetLoader();
+	//planetLoader();
 
 	renderer = new THREE.CanvasRenderer();
 	renderer.setSize(window.innerWidth, window.innerHeight);

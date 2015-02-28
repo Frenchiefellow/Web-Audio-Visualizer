@@ -121,8 +121,19 @@ function webRender() {
 			val = data[ix + sampleRate] / 1000;
 			if (ix % 26 === 0)
 				radius = radius * 1.25;
-			particles[ix][iy].position.x = (val * radius) * Math.cos(angle);
-			particles[ix][iy].position.y = (val * radius) * Math.sin(angle);
+			if( val < .10){
+				particles[ix][iy].position.x = ((val/2) * radius) * Math.cos(angle);
+				particles[ix][iy].position.y = ((val/2) * radius) * Math.sin(angle);
+			}
+			else if( val > 0.10 && val < .20){
+				particles[ix][iy].position.x = (val * radius) * Math.cos(angle);
+				particles[ix][iy].position.y = (val * radius) * Math.sin(angle);
+			}
+			else{
+				particles[ix][iy].position.x = ((1.5*val) * radius) * Math.cos(angle);
+				particles[ix][iy].position.y = ((1.5*val) * radius) * Math.sin(angle);
+			}
+
 			angle += 15 * Math.PI / 180;
 		}
 	}

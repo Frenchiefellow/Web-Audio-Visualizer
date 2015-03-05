@@ -8,12 +8,15 @@ Basically, you can drag and drop and audio file your browser can decode (There a
 and my site will turn your song into a visualization using Three.js and the Web Audio API. 
 
 Right now its in pretty primitive stages while I learn Three.js, but for the time being, songs can be decoded and the visualizer
-depicts with colored spheres. 
+depicts with colored spheres, lines, and blocks. 
 
 <h1> Plans </h1>
 After learning some Three.js, I hope to make this site very customizable; that is, the user will be able to customize what
 the visualizer output will look like (to a certain extent) and it will be very manipulable. I'm not sure how long it will
 take me to figure out how to do what I want, but I hope it will be very soon. 
+
+<h1>Current Status</h1>
+This project is currently taking a backseat to my other ongoing projects that have a higher priority, at the moment. I hope to update and work on this when I can, but updates will be pretty infrequent until the closing on the semester. Hopefully, I will be able to make some progress, as I will likely be learning more Three.js for an upcoming project. 
 
 
 <h1> Features / Additions / Revisions</h1>

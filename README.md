@@ -39,4 +39,14 @@ This project is currently taking a backseat to my other ongoing projects that ha
 <li>Timer removed due to FPS degradation (Timer caused significant performance drops)</li>
 </ul>
 </li>
+<li> <strong> 1/15/2015 - 3/5/2015 </strong>
+<ul>
+<li> Added two new modes: Bar and Web.</li>
+  <ul>
+    <li>Bar is a traditional "bar-type" visualizer with some rotational effects and user camera manipulation.</li>
+    <li>Web (currently still in development) is a web (think spiders) type visualizer in a space environment</li>
+  </ul>
+<li> Added Space Mode (still in very early development; doesn't do anything really). 
+<li>New Frontpage UI</li>
+</ul>
 </ul>

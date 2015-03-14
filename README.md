@@ -39,14 +39,19 @@ This project is currently taking a backseat to my other ongoing projects that ha
 <li>Timer removed due to FPS degradation (Timer caused significant performance drops)</li>
 </ul>
 </li>
-<li> <strong> 1/15/2015 - 3/5/2015 </strong>
+<li> <strong> 1/15/2015 - 3/5/2015 </strong></li>
 <ul>
 <li> Added two new modes: Bar and Web.</li>
   <ul>
     <li>Bar is a traditional "bar-type" visualizer with some rotational effects and user camera manipulation.</li>
     <li>Web (currently still in development) is a web (think spiders) type visualizer in a space environment</li>
   </ul>
-<li> Added Space Mode (still in very early development; doesn't do anything really). 
+<li> Added Space Mode (still in very early development; doesn't do anything really). </li>
 <li>New Frontpage UI</li>
 </ul>
+
+<li><strong>3/14/2015</strong></li>
+  <ul>
+  <li>The Visualizer is currently being implemented into <a href="https://github.com/Frenchiefellow/MusicNet-Early">MusicNet</a> for a special presentation.</li>
+  </ul>
 </ul>

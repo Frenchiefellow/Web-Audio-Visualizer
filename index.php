@@ -77,7 +77,7 @@
 	</div>
 </body>
 
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src='./scripts/jquery/jquery-ui.js'></script>
 <script src='./scripts/main.js'></script> 
 <script src='./scripts/space.js'></script> 

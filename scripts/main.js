@@ -323,12 +323,12 @@
 		$('#playArea').html('');
 
 		if ($('#playArea').hasClass('original')) {
-			if (mode === 'balls') {
+			/*if (mode === 'balls') {
 				$('#playArea').addClass('slideDown', 1000, slide);
-			} else {
+			} else {*/
 				$('#playArea').css("display", "none");
 
-			}
+			//}
 
 			$('#hideDisplay').removeClass('hideMe');
 		}

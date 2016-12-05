@@ -19,10 +19,10 @@ function spaceInit() {
 	scene = new THREE.Scene();
 	var sphere2 = new THREE.SphereGeometry(1, 1, 1);
 	var sphere = new THREE.SphereGeometry(20, 20, 20);
-	/*geometry = new THREE.Geometry();
+	//geometry = new THREE.Geometry();
 
 	var PI2 = Math.PI * 2;
-	var color = Math.ceil(Math.random() * (255 - 50) + 1);;
+	/*var color = Math.ceil(Math.random() * (255 - 50) + 1);;
 	var colored = rainbowColors(color, Y);
 	for (var ix = 0; ix < X; ix++) {
 		if (ix % 25 === 0) {

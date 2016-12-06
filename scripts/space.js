@@ -50,7 +50,7 @@ function spaceInit() {
 		angle += 15 * Math.PI / 180;
 
 	}*/
-	var material1 = new THREE.MeshBasicMaterial({
+	/*var material1 = new THREE.MeshBasicMaterial({
 			color: 0xffffff,
 			program: function(context) {
 				context.beginPath();
@@ -68,11 +68,11 @@ function spaceInit() {
 		particle.position.z = Math.random() * 3000 - 2000;
 		scene.add(particle);
 	}
-
+*/
 
 			
 	// Random "Stars" in the "sky"
-	for (var i = 0; i < 1000; i++) {
+	for (var i = 0; i < 1500; i++) {
 
 		var material = new THREE.MeshDepthMaterial({
 			color: 0xffffff,

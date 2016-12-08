@@ -87,7 +87,7 @@ function spaceInit() {
 		particle = stars[i] = new THREE.Mesh(sphere2, material);
 		particle.position.x = Math.random() * 3000 - 1000;
 		particle.position.y = Math.random() * 3000 - 1000;
-		particle.position.z = (Math.random() * 2000) + 1500;
+		particle.position.z = (Math.random() * 2000) + 250;
 		particle.scale.x = particle.scale.y = 1.6;
 		//geometry.vertices.push( particle.position );
 		scene.add(particle);
